@@ -6,9 +6,8 @@ modules:
     name: ACSAC 2024 CTF Challenges
     challenges:
       - import:
-          dojo: example-import
-          module: hello
-          challenge: apple
-        visibility:
-          start: "2025-08-28T20:00:00-07:00"
+          dojo: your-id~dff492b8
+          module: basic-chall
+          challenge: acsac-basic-chall
+
 
