@@ -4,6 +4,8 @@ type: public
 modules:
   - id: challenges
     name: ACSAC 2024 CTF Challenges
+    description: |
+      Test some HTML stuff. <b>testing</b> <script>alert(1)</script>
     challenges:
       - import:
           dojo: your-id~dff492b8
