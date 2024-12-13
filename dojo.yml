@@ -5,7 +5,7 @@ type: public
 modules:
   - id: challenges
     name: ACSAC 2024 CTF Challenges
-    privileged: true
+    allow_privileged: true
     description: |
       Test some HTML stuff. <b>testing</b> <script>alert(1)</script>
     challenges:
