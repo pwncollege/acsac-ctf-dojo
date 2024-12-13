@@ -1,10 +1,11 @@
 id: acsac-2024-ctf
 name: ACSAC 2024 CTF
 type: public
-privileged: true
+
 modules:
   - id: challenges
     name: ACSAC 2024 CTF Challenges
+    privileged: true
     description: |
       Test some HTML stuff. <b>testing</b> <script>alert(1)</script>
     challenges:
