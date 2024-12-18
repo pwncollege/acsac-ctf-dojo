@@ -1,0 +1,11 @@
+#!/bin/sh
+
+gcc -no-pie -fno-stack-protector -Os /challenge/check-admin-pin.c -o /challenge/check-admin-pin && \
+
+chmod 4755 /challenge/run
+
+chmod 755 /challenge/chat-server
+chmod 755 /challenge/check-admin-pin
+
+rm /challenge/check-admin-pin.c
+rm /challenge/.init

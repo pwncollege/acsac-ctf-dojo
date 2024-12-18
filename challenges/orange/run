@@ -1,0 +1,363 @@
+#!/opt/pwn.college/python
+
+import atexit
+import ctypes
+import multiprocessing
+import os
+import pathlib
+import re
+import signal
+import subprocess
+import sys
+import tempfile
+import threading
+import time
+
+import requests
+from dojjail import Host, Network, PRIVILEGED_UID, UNPRIVILEGED_UID
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
+
+
+libc = ctypes.CDLL(None)
+
+DH_p = int.from_bytes(bytes.fromhex(
+    "FFFFFFFF FFFFFFFF C90FDAA2 2168C234 C4C6628B 80DC1CD1 "
+    "29024E08 8A67CC74 020BBEA6 3B139B22 514A0879 8E3404DD "
+    "EF9519B3 CD3A431B 302B0A6D F25F1437 4FE1356D 6D51C245 "
+    "E485B576 625E7EC6 F44C42E9 A637ED6B 0BFF5CB6 F406B7ED "
+    "EE386BFB 5A899FA5 AE9F2411 7C4B1FE6 49286651 ECE45B3D "
+    "C2007CB8 A163BF05 98DA4836 1C55D39A 69163FA8 FD24CF5F "
+    "83655D23 DCA3AD96 1C62F356 208552BB 9ED52907 7096966D "
+    "670C354E 4ABC9804 F1746C08 CA18217C 32905E46 2E36CE3B "
+    "E39E772C 180E8603 9B2783A2 EC07A28F B5C55DF0 6F4C52C9 "
+    "DE2BCBF6 95581718 3995497C EA956AE5 15D22618 98FA0510 "
+    "15728E5A 8AACAA68 FFFFFFFF FFFFFFFF"
+), "big")
+DH_g = 2
+
+
+def make_unprivileged(*, keep_caps=None):
+    CAP_EFFECTIVE = 1 << 0
+    CAP_PERMITTED = 1 << 1
+    CAP_INHERITABLE = 1 << 2
+    CAP_NET_BIND_SERVICE = 10
+    PR_SET_KEEPCAPS = 8
+    PR_CAP_AMBIENT = 47
+    PR_CAP_AMBIENT_RAISE = 2
+
+    if keep_caps is not None:
+        if libc.prctl(PR_SET_KEEPCAPS, 1, 0, 0, 0) != 0:
+            raise RuntimeError("Failed to set keep capabilities")
+
+    os.setresgid(UNPRIVILEGED_UID, UNPRIVILEGED_UID, UNPRIVILEGED_UID)
+    os.setresuid(UNPRIVILEGED_UID, UNPRIVILEGED_UID, UNPRIVILEGED_UID)
+
+    if keep_caps is not None:
+        sets = CAP_EFFECTIVE | CAP_PERMITTED | CAP_INHERITABLE
+        cap_header = ctypes.create_string_buffer(8)
+        cap_data = ctypes.create_string_buffer(12 * 2)
+        ctypes.cast(cap_header, ctypes.POINTER(ctypes.c_uint32))[0] = 0x20080522
+        if libc.capget(ctypes.byref(cap_header), ctypes.byref(cap_data)) != 0:
+            raise RuntimeError("Failed to get capabilities")
+        for index in range(3):
+            if sets & (1 << index):
+                cap_set = ctypes.cast(cap_data, ctypes.POINTER(ctypes.c_uint32))[index]
+                for cap in keep_caps:
+                    cap_set |= 1 << cap
+                ctypes.cast(cap_data, ctypes.POINTER(ctypes.c_uint32))[index] = cap_set
+        if libc.capset(ctypes.byref(cap_header), ctypes.byref(cap_data)) != 0:
+            raise RuntimeError("Failed to set capabilities")
+        if libc.prctl(PR_CAP_AMBIENT, PR_CAP_AMBIENT_RAISE, CAP_NET_BIND_SERVICE, 0, 0) != 0:
+            raise RuntimeError("Failed to raise capability in ambient set")
+
+
+def start_chat_server():
+    old_umask = os.umask(0o077)
+    admin_pin_dir = pathlib.Path(tempfile.mkdtemp())
+    chat_server_dir = pathlib.Path(tempfile.mkdtemp())
+    os.umask(old_umask)
+
+    admin_pin = os.urandom(16).hex()
+    admin_pin_path = admin_pin_dir / "admin.pin"
+    admin_pin_path.write_text(f"{admin_pin}\n")
+    os.environ["ADMIN_PIN_PATH"] = str(admin_pin_path)
+
+    check_admin_pin_path = pathlib.Path(__file__).parent / "check-admin-pin"
+    (chat_server_dir / "check-admin-pin").write_bytes(check_admin_pin_path.read_bytes())
+
+    os.chown(chat_server_dir, UNPRIVILEGED_UID, UNPRIVILEGED_UID)
+    os.chmod(chat_server_dir / "check-admin-pin", 0o4755)
+
+    CAP_NET_BIND_SERVICE = 10
+    make_unprivileged(keep_caps=[CAP_NET_BIND_SERVICE])
+
+    os.chdir(chat_server_dir)
+
+    dev_null_fd = os.open("/dev/null", os.O_RDWR)
+    log_fd = os.open(chat_server_dir / "chat-server.log", os.O_RDWR | os.O_CREAT | os.O_APPEND, 0o644)
+    os.dup2(dev_null_fd, 0)
+    os.dup2(log_fd, 1)
+    os.dup2(log_fd, 2)
+
+    os.environ["CHAT_HOST"] = "0.0.0.0"
+    chat_server_path = pathlib.Path(__file__).parent / "chat-server"
+    os.execve(chat_server_path, ["chat-server"], os.environ)
+
+
+def main():
+    if os.geteuid() != 0:
+        print("Error: must be run as root", file=sys.stderr)
+        sys.exit(1)
+
+    flag = open("/flag").read().strip()
+
+    uid = os.getuid()
+    cwd = os.getcwd()
+    env = os.environ.copy()
+
+    os.setuid(0)
+    os.setgid(0)
+    os.setgroups([0])
+    PR_SET_DUMPABLE  = 4
+    libc.prctl(PR_SET_DUMPABLE, True)
+
+    os.environ.clear()
+    os.environ["PATH"] = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+    alice_host = Host("alice")
+    bob_host = Host("bob")
+    mallory_host = Host("mallory")
+    sharon_host = Host("sharon")
+
+    class HackerHost(Host):
+        @property
+        def uid_map(self):
+            return {PRIVILEGED_UID: uid}
+    hacker_host = HackerHost("hacker")
+
+    hosts = [alice_host, bob_host, mallory_host, sharon_host, hacker_host]
+    network = Network("router", hosts=hosts)
+
+    print("Starting...", end="", flush=True)
+    network.run()
+
+    os.environ["CHAT_HOST"] = network.host_ips[alice_host]
+    os.environ["CHAT_PORT"] = "80"
+    chat_server_url = f"http://{network.host_ips[alice_host]}"
+
+    alice_host.exec(start_chat_server, wait=False)
+
+    def wait_for_chat_server():
+        for _ in range(50):
+            try:
+                requests.get("http://127.0.0.1")
+            except requests.ConnectionError:
+                time.sleep(0.1)
+                continue
+            return
+        raise RuntimeError("Chat server did not start")
+    alice_host.exec(wait_for_chat_server)
+
+    def create_account(username, password, *, url=chat_server_url):
+        requests.post(f"{url}/register", data={"username": username, "password": password})
+
+    alice_password = os.urandom(16).hex()
+    alice_host.exec(lambda: create_account("alice", alice_password, url="http://127.0.0.1"))
+
+    bob_password = os.urandom(16).hex()
+    bob_host.exec(lambda: create_account("bob", bob_password))
+
+    mallory_password = os.urandom(16).hex()
+    mallory_host.exec(lambda: create_account("mallory", mallory_password))
+
+    sharon_username = f"sharon{int.from_bytes(os.urandom(8), 'big')}"
+    sharon_password = os.urandom(16).hex()
+    sharon_host.exec(lambda: create_account(sharon_username, sharon_password))
+
+    def share_flag():
+        session = requests.Session()
+        session.post(f"{chat_server_url}/login", data={"username": sharon_username, "password": sharon_password})
+        session.post(f"{chat_server_url}/chat/bob", data={"message": f"The flag is {flag}."})
+    sharon_host.exec(share_flag)
+
+    def check_flag():
+        session = requests.Session()
+        session.post(f"{chat_server_url}/login", data={"username": "bob", "password": bob_password})
+        response = session.get(f"{chat_server_url}/chat/{sharon_username}")
+        if flag not in response.text:
+            raise RuntimeError("Flag not shared")
+        session.post(f"{chat_server_url}/chat/mallory", data={"message": "Wow, someone shared the flag with me!"})
+    bob_host.exec(check_flag)
+
+    def delete_account():
+        session = requests.Session()
+        session.post(f"{chat_server_url}/login", data={"username": sharon_username, "password": sharon_password})
+        session.post(f"{chat_server_url}/user/{sharon_username}/modify", data={"delete": "Delete"})
+    sharon_host.exec(delete_account)
+
+    def check_chat_is_gone():
+        session = requests.Session()
+        session.post(f"{chat_server_url}/login", data={"username": "bob", "password": bob_password})
+        response = session.get(f"{chat_server_url}/chat/{sharon_username}")
+        if response.status_code != 404:
+            raise RuntimeError("Chat not deleted")
+    bob_host.exec(check_chat_is_gone)
+
+    listening_event = multiprocessing.Event()
+    reported_event = multiprocessing.Event()
+
+    def browse():
+        os.environ["HOME"] = tempfile.mkdtemp()
+
+        options = FirefoxOptions()
+        options.add_argument("--headless")
+        service = FirefoxService(executable_path="/usr/local/bin/geckodriver", log_path="/dev/null")
+        browser = webdriver.Firefox(service=service, options=options)
+        atexit.register(browser.quit)
+
+        browser.get(f"http://127.0.0.1/login")
+        browser.find_element(By.NAME, "username").send_keys("alice")
+        browser.find_element(By.NAME, "password").send_keys(alice_password)
+        browser.find_element(By.CSS_SELECTOR, "input[type='submit']").submit()
+
+        try:
+            WebDriverWait(browser, 2).until(EC.text_to_be_present_in_element((By.TAG_NAME, "body"), "Hello alice!"))
+        except TimeoutException:
+            raise RuntimeError("Login failed")
+
+        browser.find_element(By.NAME, "other_username").send_keys("mallory")
+        browser.find_element(By.CSS_SELECTOR, "input[type='submit']").submit()
+        try:
+            WebDriverWait(browser, 2).until(EC.url_matches(f"http://127.0.0.1/chat/mallory"))
+        except TimeoutException:
+            raise RuntimeError("Failed to open chat with mallory")
+
+        listening_event.set()
+
+        while True:
+            try:
+                messages = [line for line in
+                            browser.find_element(By.TAG_NAME, "main").get_attribute("innerHTML").splitlines()
+                            if line.strip() and line.strip() != "<br>"]
+                if messages and messages[-1] == "mallory: I heard someone shared the flag with Bob!":
+                    browser.find_element(By.NAME, "message").send_keys("Thanks for letting me know!")
+                    browser.find_element(By.NAME, "submit").submit()
+                    reported_event.set()
+            except Exception:
+                return
+            time.sleep(1)
+
+    alice_host.exec(browse, uid=UNPRIVILEGED_UID, wait=False)
+    listening_event.wait()
+
+    print("\r", end="", flush=True)
+    pid = os.getpid()
+    hacker_pid = hacker_host.exec(lambda: subprocess.run("/bin/bash", env=env, cwd=cwd), wait=False)
+    hacker_thread = threading.Thread(target=lambda: (os.waitpid(hacker_pid, 0), os.killpg(pid, signal.SIGTERM)))
+    hacker_thread.start()
+
+    reported_event.wait()
+
+    def alice_message_bob():
+        session = requests.Session()
+        session.post("http://127.0.0.1/login", data={"username": "alice", "password": alice_password})
+
+        dh_a = int.from_bytes(os.urandom(256), "big")
+        dh_A = pow(DH_g, dh_a, DH_p)
+        session.post("http://127.0.0.1/chat/bob", data={"message": f"Hey Bob, I need to chat with you about something important. Let's chat securely over DHE-AES: {dh_A}."})
+
+        dh_B_re = re.compile(r"Hey Alice, sure: (\d+)\.")
+        while True:
+            response = session.get("http://127.0.0.1/chat/bob")
+            if match := dh_B_re.search(response.text):
+                break
+            time.sleep(1)
+        dh_B = int(match.group(1))
+        dh_s = pow(dh_B, dh_a, DH_p)
+
+        time.sleep(1)
+
+        key = dh_s.to_bytes(256, "big")[:16]
+        cipher_send = AES.new(key, AES.MODE_ECB)
+        cipher_recv = AES.new(key, AES.MODE_ECB)
+        encrypt = lambda data: cipher_send.encrypt(pad(data.encode(), cipher_send.block_size)).hex()
+        decrypt = lambda data: unpad(cipher_recv.decrypt(bytes.fromhex(data)), cipher_recv.block_size).decode()
+
+        session.post("http://127.0.0.1/chat/bob", data={"message": encrypt("Hey Bob, I know that someone shared the flag with you. Who was it?")})
+
+        encrypted_message_re = re.compile(r"bob: ([0-9a-f]+)")
+        flag_sharer_re = re.compile(r"Oh, it was \"(\w+)\"; I think she deleted her account\.")
+        while True:
+            response = session.get("http://127.0.0.1/chat/bob")
+            encrypted_messages = encrypted_message_re.findall(response.text)
+            if any(flag_sharer_re.match(decrypt(encrypted_message))
+                   for encrypted_message in encrypted_messages):
+                break
+            time.sleep(1)
+
+        time.sleep(1)
+
+        session.post("http://127.0.0.1/chat/bob", data={"message": encrypt("Thanks Bob, I'll look into it.")})
+
+    def bob_message_alice():
+        session = requests.Session()
+        session.post(f"{chat_server_url}/login", data={"username": "bob", "password": bob_password})
+
+        dh_A_re = re.compile(r"Let's chat securely over DHE-AES: (\d+)\.")
+        while True:
+            response = session.get(f"{chat_server_url}/chat/alice")
+            if match := dh_A_re.search(response.text):
+                break
+            time.sleep(1)
+        dh_A = int(match.group(1))
+
+        time.sleep(1)
+
+        dh_b = int.from_bytes(os.urandom(256), "big")
+        dh_B = pow(DH_g, dh_b, DH_p)
+        dh_s = pow(dh_A, dh_b, DH_p)
+        session.post(f"{chat_server_url}/chat/alice", data={"message": f"Hey Alice, sure: {dh_B}."})
+
+        key = dh_s.to_bytes(256, "big")[:16]
+        cipher_send = AES.new(key, AES.MODE_ECB)
+        cipher_recv = AES.new(key, AES.MODE_ECB)
+        encrypt = lambda data: cipher_send.encrypt(pad(data.encode(), cipher_send.block_size)).hex()
+        decrypt = lambda data: unpad(cipher_recv.decrypt(bytes.fromhex(data)), cipher_recv.block_size).decode()
+
+        encrypted_message_re = re.compile(r"alice: ([0-9a-f]+)")
+        while True:
+            response = session.get(f"{chat_server_url}/chat/alice")
+            encrypted_messages = encrypted_message_re.findall(response.text)
+            if any(decrypt(encrypted_message) == "Hey Bob, I know that someone shared the flag with you. Who was it?"
+                   for encrypted_message in encrypted_messages):
+                break
+            time.sleep(1)
+
+        time.sleep(1)
+
+        session.post(f"{chat_server_url}/chat/alice", data={"message": encrypt(f"Oh, it was \"{sharon_username}\"; I think she deleted her account.")})
+
+        while True:
+            response = session.get(f"{chat_server_url}/chat/alice")
+            encrypted_messages = encrypted_message_re.findall(response.text)
+            if any(decrypt(encrypted_message) == "Thanks Bob, I'll look into it."
+                   for encrypted_message in encrypted_messages):
+                break
+            time.sleep(1)
+
+    alice_host.exec(alice_message_bob, wait=False)
+    bob_host.exec(bob_message_alice, wait=False)
+
+    hacker_thread.join()
+
+if __name__ == "__main__":
+    main()
