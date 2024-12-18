@@ -275,7 +275,7 @@ modules:
       $('#current-challenge #challenge-id').val(challenge.challenge_id);
       // Example Usage
       onClassChange('#current-challenge #challenge-input', (element) => {
-      if (element.hasClass("correct"))
+      if ($(element).hasClass("correct"))
       {
         $(`#${island}-light`).removeClass(`${island}-current`);
         $(`#${island}-color`).addClass(`${island}-current`);
