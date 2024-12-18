@@ -345,6 +345,8 @@ modules:
             }
             challenges[challenge.id] = challenge;
         });
+        challenges_div.addClass("hide");
+        challenges_div.closest("h4").addClass("hide");
       });
       </script>
 
