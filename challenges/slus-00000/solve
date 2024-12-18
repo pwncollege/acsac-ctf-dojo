@@ -1,0 +1,27 @@
+#!/usr/bin/env python-suid
+
+import hashlib
+
+print("""I wonder what happens when I manage to clear 99999 lines...
+(Flag is entirely in capitals)
+""")
+
+print("""You'll need to extract the flag from /games/slus00000.elf, which can be run using /console/run.
+""")
+
+print("""Once you've solved that, input the flag that the challenges gives you here and I'll give you the real flag.
+""")
+
+solution = input("Challenge flag (all uppercase):")
+
+solution = solution.strip()
+
+h = hashlib.sha512()
+h.update(solution.encode())
+hash_digest = h.hexdigest()
+
+if hash_digest == '366ebe03fb70ff65b76c4bf940c3fd5b75e46e62a22227b53d89bb6a5417b728749238f0a19b7e3db97582f4a26ccb269dfc731eac05b87c14b15c4ee2923ec1':
+    with open("/flag") as f:
+        print(f.read())
+else:
+    print("Flag incorrect!")

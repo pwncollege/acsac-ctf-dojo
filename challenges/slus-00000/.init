@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ ! -d /home/hacker/.local/share/duckstation/bios ]
+then
+    mkdir -p /home/hacker/.local/share/duckstation/bios
+    chown hacker:hacker -R /home/hacker/.local/share/duckstation/
+    cp /console/SCPH1001.BIN /home/hacker/.local/share/duckstation/bios
+    chmod 644 /home/hacker/.local/share/duckstation/bios/SCPH1001.BIN
+fi
+
+if [ ! -f /home/hacker/.local/share/duckstation/settings.ini ]
+then
+    mkdir -p /home/hacker/.local/share/duckstation
+    chown hacker:hacker -R /home/hacker/.local/share/duckstation/
+    cp /console/settings.ini /home/hacker/.local/share/duckstation/settings.ini
+    chown hacker:hacker /home/hacker/.local/share/duckstation/settings.ini
+    chmod 644 /home/hacker/.local/share/duckstation/settings.ini
+fi
+

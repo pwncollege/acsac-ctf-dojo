@@ -1,0 +1,17 @@
+#!/usr/bin/env python-suid
+
+import hashlib
+
+solution = input("Challenge flag from https://acsac24-hotcrp.hackpack.club/acsac24/: ")
+
+solution = solution.strip()
+
+h = hashlib.sha512()
+h.update(solution.encode())
+hash_digest = h.hexdigest()
+
+if hash_digest == '7507a8bbc6017f6209de883d473ca787c7a739cd07c27cce52948caf0b7b2c688db2cab2976459c0ec4f156c9e12cb93c5c872d45f728ebf0ad6d8210ae39ff0':
+    with open("/flag") as f:
+        print(f.read())
+else:
+    print("Flag incorrect!")
