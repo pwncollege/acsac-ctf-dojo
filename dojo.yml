@@ -82,9 +82,9 @@ modules:
       </style>
       <div class="hide" id="current-challenge">
       <h1 class="title">Challenge Title</h1>
-      <h2 class="points">500</h2>
-      <h2 class="num-solves">0</h2>
       <h2 class="pwn-solves">0</h2>
+      <h3 class="points">500</h2>
+      <h3 class="num-solves">0</h2>
       <p class="challenge-description">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non condimentum nunc, ut faucibus mauris. 
       </p>
@@ -346,7 +346,7 @@ modules:
             challenges[challenge.id] = challenge;
         });
         challenges_div.addClass("hide");
-        challenges_div.closest("h4").addClass("hide");
+        $(challenges_div.siblings("h2")[0]).addClass("hide");
       });
       </script>
 
