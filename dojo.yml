@@ -296,7 +296,8 @@ modules:
       });
       $( document ).ready(function () {
         const challenges_div = $($("#challenges.accordion")[1]);
-        challenges_div.find(".accordion-item").forEach(chall => {
+        challenges_div.find(".accordion-item").each(function () {
+            const chall = $(this);
             const challenge = {
                 module: chall.find("#module").val(),
                 solves: chall.find(".total-solves").text(),
