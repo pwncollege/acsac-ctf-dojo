@@ -245,12 +245,13 @@ def main():
 
         while True:
             try:
-                messages = [line for line in
+                WebDriverWait(browser, 2).until(EC.presence_of_element_located((By.TAG_NAME, "main")))
+                messages = [line.strip() for line in
                             browser.find_element(By.TAG_NAME, "main").get_attribute("innerHTML").splitlines()
                             if line.strip() and line.strip() != "<br>"]
                 if messages and messages[-1] == "mallory: I heard someone shared the flag with Bob!":
                     browser.find_element(By.NAME, "message").send_keys("Thanks for letting me know!")
-                    browser.find_element(By.NAME, "submit").submit()
+                    browser.find_element(By.CSS_SELECTOR, "input[type='submit']").submit()
                     reported_event.set()
             except Exception:
                 return
@@ -299,10 +300,14 @@ def main():
         while True:
             response = session.get("http://127.0.0.1/chat/bob")
             encrypted_messages = encrypted_message_re.findall(response.text)
-            if any(flag_sharer_re.match(decrypt(encrypted_message))
-                   for encrypted_message in encrypted_messages):
-                break
-            time.sleep(1)
+            for encrypted_message in encrypted_messages:
+                if match := flag_sharer_re.match(decrypt(encrypted_message)):
+                    break
+            else:
+                time.sleep(1)
+                continue
+            break
+        flag_sharer = match.group(1)
 
         time.sleep(1)
 

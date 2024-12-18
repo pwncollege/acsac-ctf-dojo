@@ -11,11 +11,13 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 from flask import Flask, request, session, redirect
 
+
 HOST = os.getenv("CHAT_HOST", "127.0.0.1")
 PORT = int(os.getenv("CHAT_PORT", 8080))
 DB_PATH = os.getenv("DB_PATH", "./chat.db")
 ADMIN_PIN_PATH = os.getenv("ADMIN_PIN_PATH", "./admin.pin")
 CHECK_ADMIN_PIN_PATH = os.getenv("CHECK_ADMIN_PIN_PATH", "./check-admin-pin")
+
 
 app = Flask(__name__)
 
@@ -47,15 +49,6 @@ def authed_only(func):
     def wrapper(*args, **kwargs):
         if "username" not in session:
             return "You are not logged in! Please <a href='/login'>login</a> or <a href='/register'>register</a>.", 403
-        return func(*args, **kwargs)
-    return wrapper
-
-
-def admin_only(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        if not session.get("admin"):
-            return "You must be an admin to access this page! Back to <a href='/'>home</a>.", 403
         return func(*args, **kwargs)
     return wrapper
 
@@ -97,8 +90,7 @@ def register():
         password = request.form["password"]
     except KeyError:
         return "Missing username or password. Back to <a href='/'>home</a>.", 400
-    result = db.execute(f"SELECT * FROM users WHERE username='{username}'").fetchone()
-    if result:
+    if db.execute(f"SELECT * FROM users WHERE username='{username}'").fetchone():
         return "Username already exists. Back to <a href='/'>home</a>.", 400
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     admin = request.remote_addr == "127.0.0.1"
@@ -213,25 +205,37 @@ def modify_user(username=None):
     if username is None:
         return redirect(f"/user/{session['username']}/modify")
 
-    admin_only = session["username"] != username
+    result = db.execute(f"SELECT * FROM users WHERE username='{username}'").fetchone()
+    if not result:
+        return "User does not exist. Back to <a href='/'>home</a>.", 400
+    username, password, admin = result
 
-    if admin_only and not session.get("admin"):
-        return "You must be an admin to modify other users. Back to <a href='/'>home</a>.", 403
-
-    if request.method == "GET":
-        admin_value = "true" if session.get("admin") else "false"
-        admin_pin_html = '<input type="password" name="admin_pin" value="" required>' if admin_only else ""
+    if request.method == "GET" and session["admin"]:
         return f"""
         Modify user {username}:
         <form method="post">
             <input type="text" name="username" placeholder="Username" value="{username}">
             <input type="password" name="password" placeholder="Password">
-            <input type="checkbox" name="admin" value="{admin_value}"> Admin
-            {admin_pin_html}
+            <input type="checkbox" name="admin" value="{'true' if admin else 'false'}"> Admin
+            <input type="password" name="admin_pin" value="" required>
+            <input type="submit" value="Modify">
+            <input type="submit" name="delete" value="Delete User">
+        </form>
+        """
+    elif request.method == "GET" and not session["admin"]:
+        return f"""
+        Modify user {username}:
+        <form method="post">
+            <input type="password" name="password" placeholder="Password">
             <input type="submit" value="Modify">
             <input type="submit" name="delete" value="Delete">
         </form>
         """
+
+    admin_only = session["username"] != username or any(name in request.form for name in ("username", "admin"))
+
+    if admin_only and not session.get("admin"):
+        return "You must be an admin to modify other users. Back to <a href='/'>home</a>.", 403
 
     if admin_only:
         try:
@@ -249,11 +253,6 @@ def modify_user(username=None):
             stderr = result.stderr.strip()
             return f"{stderr}. Back to <a href='/'>home</a>.", 403
 
-    result = db.execute(f"SELECT * FROM users WHERE username='{username}'").fetchone()
-    if not result:
-        return "User does not exist. Back to <a href='/'>home</a>.", 400
-
-    username, password, admin = result
     encrypted_username = encrypt(username.encode()).hex()
 
     if "delete" in request.form:
@@ -267,11 +266,10 @@ def modify_user(username=None):
         return "User deleted. Back to <a href='/'>home</a>."
 
     new_username = request.form.get("username", username)
-    new_password = hashlib.sha256(request.form["password"]).hexdigest() if "password" in request.form else password
-    new_admin = request.form["admin"] if "admin" in request.form else ("true" if admin else "false")
-    if new_admin not in ("true", "false"):
-        return "Invalid admin field. Back to <a href='/'>home</a>.", 400
-    db.execute(f"UPDATE users SET username='{new_username}', hashed_password='{new_password}', admin={new_admin} WHERE username='{username}'")
+    new_password = hashlib.sha256(request.form["password"]).hexdigest() if request.form.get("password") else password
+    new_admin = request.form.get("admin", ("true" if admin else "false")) == "true"
+
+    db.execute(f"UPDATE users SET username='{new_username}', hashed_password='{new_password}', admin={'true' if new_admin else 'false'} WHERE username='{username}'")
 
     if new_username != username:
         encrypted_username = encrypt(username.encode()).hex()
@@ -280,15 +278,29 @@ def modify_user(username=None):
         for encrypted_username_1, encrypted_username_2, encrypted_contents in result:
             contents = decrypt(bytes.fromhex(encrypted_contents)).decode()
             new_encrypted_username_1, new_encrypted_username_2 = sorted([encrypted_new_username if encrypted_username_1 == encrypted_username else encrypted_username_1,
-                                                                         encrypted_new_username if encrypted_username_2 == encrypted_username else encrypted_username_2])
-            encrypted_new_contents = encrypt("".join(
+                                                                         encrypted_new_username if encrypted_username_2 == encrypted_username else encrypted_username_2],
+                                                                        key=lambda k: k or "")
+            new_encrypted_contents = encrypt("".join(
                 (line.replace(f"{username}: ", f"{new_username}: ", 1) if line.startswith(f"{username}: ") else line) + "\n"
                 for line in contents.splitlines()
             ).encode()).hex()
-            db.execute(f"UPDATE encrypted_chats SET encrypted_username_1='{new_encrypted_username_1}', encrypted_username_2='{new_encrypted_username_2}', encrypted_contents='{encrypted_new_contents}' "
-                       f"WHERE encrypted_username_1='{encrypted_username_1}' AND encrypted_username_2='{encrypted_username_2}' AND encrypted_contents='{encrypted_contents}'")
+            sql_set = ", ".join(f"{k}='{v}'" if v is not None else f"{k}=NULL" for k, v in
+                                dict(encrypted_username_1=new_encrypted_username_1,
+                                     encrypted_username_2=new_encrypted_username_2,
+                                     encrypted_contents=new_encrypted_contents).items())
+            sql_where = " AND ".join(f"{k}='{v}'" if v is not None else f"{k} IS NULL" for k, v in
+                                     dict(encrypted_username_1=encrypted_username_1,
+                                          encrypted_username_2=encrypted_username_2,
+                                          encrypted_contents=encrypted_contents).items())
+            db.execute(f"UPDATE encrypted_chats SET {sql_set} WHERE {sql_where}")
 
     db.commit()
+    if session["username"] == username:
+        if new_username != username:
+            session["username"] = new_username
+        if new_admin != admin:
+            session["admin"] = new_admin
+
     return "User modified. Back to <a href='/'>home</a>."
 
 
