@@ -1,0 +1,69 @@
+#!/usr/bin/expect -f
+
+#
+# http://gunkies.org/wiki/Installing_4.3_BSD_on_SIMH
+#
+
+# Match as much as the scouter says
+match_max 9001
+
+# And wait as long as Air Supply can
+set timeout -1
+
+# Simplify shell commands
+proc send_cmd line {
+  send "$line\n"
+  expect "# "
+}
+
+# Simplify here documents
+proc send_heredoc line {
+  send "$line\n"
+
+  if [string equal $line "EOF"] {
+    expect "# "
+  } else {
+    expect "> "
+  }
+}
+
+# Simplify file I/O
+proc send_file file {
+  set fh [open $file]
+  set buf [read $fh]
+  close $fh
+
+  foreach line [split $buf "\n"] {
+    send "$line\n"
+    expect "\n"
+  }
+}
+
+# Define a cleanup procedure
+proc cleanup {} {
+  global child_id
+  if {[info exists child_id]} {
+    # Kill the spawned process
+    exec kill -9 $child_id
+  }
+  exit 1
+}
+
+# Trap signals
+trap cleanup {SIGINT SIGTERM}
+
+# Booting the emulator
+set child_id [spawn ./vax780 boot.ini]
+
+expect "login: "
+
+send "root\n"
+expect "simh#"
+
+# When run, add the command to add the flag here
+TODO_REPLACE_WITH_FLAG_COMMAND
+
+# Restoring the rootdump
+expect "Simulation stopped*\n"
+send "q\n"
+expect eof

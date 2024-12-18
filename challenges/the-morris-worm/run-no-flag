@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p /tmp/simh-no-root
+rm -rf /tmp/simh-no-root/*
+rsync -avzP /simh/ /tmp/simh-no-root
+
+cd /tmp/simh-no-root
+trap "kill -9 0" SIGINT
+/simh/vax780 boot.ini

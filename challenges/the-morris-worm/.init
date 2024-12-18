@@ -1,0 +1,4 @@
+#!/bin/bash
+
+chmod a-s /challenge/run.exp
+chmod a-s /challenge/run-no-flag

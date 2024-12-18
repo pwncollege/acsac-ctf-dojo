@@ -1,0 +1,6 @@
+#!/usr/bin/env bash-suid
+
+umask 066
+cd /opt/walk-in-the-park/xv6-riscv
+/opt/walk-in-the-park/gen.sh > /opt/walk-in-the-park/xv6-riscv/user/rand
+/bin/make qemu

@@ -3,6 +3,9 @@ name: PUBLIC ACSAC 2024 CTF
 type: public
 allow_privileged: true
 
+award:
+  emoji: 🌴
+
 modules:
   - id: challenges
     name: PUBLIC ACSAC 2024 CTF Challenges
@@ -307,24 +310,66 @@ modules:
           
           Use `/console/run` to run the game and `/challenge/solve` to submit game flag for real flag.
 
-      # - id: walk-in-the-park
-      #   name: walk-in-the-park
-      # - id: mechanical-arm
-      #   name: mechanical-arm
-      # - id: tickeyhellman
-      #   name: tickeyhellman
-      # - id: juniorust
-      #   name: juniorust
-      # - id: the-morris-worm
-      #   name: the-morris-worm
-      # - id: temple-of-soul
-      #   name: temple-of-soul
-      # - id: waa
-      #   name: waa
-      # - id: stutterstep
-      #   name: stutterstep
-      # - id: orange
-      #   name: orange
+       - id: walk-in-the-park
+         name: walk-in-the-park
+         image: adamdoupe/walk-in-the-park
+      - id: mechanical-arm
+        name: mechanical-arm
+        image: adamdoupe/arm-rop
+      - id: tickeyhellman
+        name: tickeyhellman
+        image: adamdoupe/tickeyhellman
+      - id: juniorust
+        name: juniorust
+        image: adamdoupe/cowsay
+      - id: the-morris-worm
+        name: the-morris-worm
+        image: adamdoupe/the-morris-worm
+      - id: temple-of-soul
+        name: temple-of-soul
+        image: adamdoupe/temple-of-soul
+        description: |
+          ## Puna
+          - Category: `rev`, `forensics`, `ZealOS`
+          - Author: `DaveZero`
+
+          Puna, of the Big Island, is a place of spirituality, cut off from the conveniences of life. In many ways, it is a holy place... 
+      
+          I was walking around a beach in Puna when I suddenly had a vision.
+
+          I was playing a game in a temple called the Temple of Soul. It was against another soul: I think it is a legendary soul from centuries ago, but I can't remember who he was.  
+
+          However, I remember some of his words:
+
+            "The password is the sequence of ordered moves, which indicate the starting and destination positions.
+
+            For example, if you see
+
+            Move 1: A1-A2  
+            Move 2: B1-B2
+
+            The password is A1A2B1B2 (in capitals)"
+
+            Will I be able to remember the temple of souls?
+
+            Notes:
+              1. At least one move is corrupted, and it is intended
+              2. Be creative and use your reasoning skills!
+
+        
+            The challenge is to reverse what's in `/tmp/temple.dump`.
+      
+            You can use `/challenge/run` to boot a fresh ZealOS.
+
+            Once you have the password, run `/challenge/solve` to get the flag!
+
+      - id: waa
+        name: Waʻa
+        image: adamdoupe/tickeyhellman
+      - id: stutterstep
+        name: stutterstep
+      - id: orange
+        name: orange
 
 
 

@@ -1,0 +1,17 @@
+#!/usr/bin/env python-suid
+
+import hashlib
+
+solution = input("Password:")
+
+solution = solution.strip()
+
+h = hashlib.sha512()
+h.update(solution.encode())
+hash_digest = h.hexdigest()
+
+if hash_digest == '4b929723121fff10b51ef872f03017f0155ba3712913474d9ac4a2f8aaa2acb1c6b1f0e09dba8a56baac0f1fa77e1f1a5d5938fdc363ce82f61e055dc51f4d2c':
+    with open("/flag") as f:
+        print(f.read())
+else:
+    print("Flag incorrect!")

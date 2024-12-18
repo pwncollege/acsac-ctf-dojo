@@ -1,0 +1,26 @@
+#!/usr/bin/env bash-suid
+
+# Read in /flag
+FLAG=$(cat /flag)
+
+mkdir -p /tmp/simh-root
+rm -rf /tmp/simh-root/*
+
+rsync -avzP /simh/ /tmp/simh-root
+
+chown -R root:root /tmp/simh-root
+chmod 600 /tmp/simh-root/rq.dsk
+
+cd /tmp/simh-root
+
+cp /challenge/run.exp ./run.exp
+
+chown root:root ./run.exp
+chmod 600 ./run.exp
+
+sed -i 's/TODO_REPLACE_WITH_FLAG_COMMAND/send_cmd "echo '"$FLAG"' > \/flag"/g' run.exp
+
+echo "Going to start the challenge, should be running on port 79 (might take a bit to start up)"
+echo "Press Control-C to kill the challenge"
+trap "kill 0" SIGINT
+expect ./run.exp 2> /dev/null > /dev/null
