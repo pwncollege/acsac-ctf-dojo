@@ -17,4 +17,4 @@ Once you get the challenge flag, start this challenge and run `/challenge/solve`
 
 1. The only thing that is input to the LLM is the PDF: the paper title and abstract do not matter.
 
-2. The LLM generates an offline hotcrp template, [a copy of which you can find here](https://acsacctf.com/themes/dojo_theme/static/hotcrp-review-1.txt), which is then loaded as the review. 
+2. The LLM generates an offline hotcrp template, [a copy of which you can find here](https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/hotcrp-review-1.txt), which is then loaded as the review. 
