@@ -295,7 +295,19 @@ modules:
       }
       });
       $( document ).ready(function () {
-        const test = "";
+        const challenges_div = $($("#challenges.accordion")[1]);
+        challenges_div.find(".accordion-item").forEach(chall => {
+            const challenge = {
+                module: chall.find("#module").val(),
+                solves: chall.find(".total-solves").text(),
+                description: chall.find(".accordion-item-body .embed-responsive").html(),
+                id: chall.find("#challenge").val(),
+                challenge_id: chall.find("#challenge-id").val(),
+                name: chall.find(".challenge-name").text(),
+                solved: chall.find(".challenge-unsolved").length == 0,
+            };
+            challenges[challenge.id] = challenge;
+        });
       });
       </script>
 
