@@ -124,56 +124,43 @@ modules:
         </div>
       </div>
       </div>
-
       <div class="island_container" id="island_container">
       <!-- Replace with your actual island PNG file -->
       <img class="ocean" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Map Background With Ocean.JPG")}}" alt="Background" id="baseImage">
       <img class="island big-island-crack" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Crack.PNG")}}" alt="lanai big-island-crack" id="big-island-crack">
-
       <img class="island unsolved big-island-3 big-island-3-current" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Big Island Piece 3 L1.PNG")}}" alt="lanai big-island-3" id="big-island-3-light">
       <img class="island unsolved big-island-3 hide" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Piece 3.PNG")}}" alt="lanai big-island-3" id="big-island-3-color">
       <img class="island hide medium big-island-3" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Big Island Piece 3 L2.PNG")}}" alt="big-island-3" id="big-island-3-medium">
-
       <img class="island unsolved big-island-2-current big-island-2" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Big Island Piece 2 L1.PNG")}}" alt="lanai big-island-2" id="big-island-2-light">
       <img class="island unsolved hide big-island-2" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Piece 2.PNG")}}" alt="lanai big-island-2" id="big-island-2-color">
       <img class="island hide medium big-island-2" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Big Island Piece 2 L2.PNG")}}" alt="big-island-2" id="big-island-2-medium">
-      
       <img class="island unsolved big-island-1-current big-island-1" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Big Island Piece 1 L1.PNG")}}" alt="lanai big-island-1" id="big-island-1-light">
       <img class="island unsolved hide big-island-1" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Piece 1.PNG")}}" alt="lanai big-island-1" id="big-island-1-color">
       <img class="island hide medium big-island-1" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Big Island Piece 1 L2.PNG")}}" alt="big-island-1" id="big-island-1-medium">
-
       <img class="island unsolved lanai-current lanai" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Lanai L1.PNG")}}" alt="lanai unsolved" id="lanai-light">
       <img class="island unsolved hide lanai" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Lanai.PNG")}}" alt="lanai unsolved" id="lanai-color">
       <img class="island hide medimum lanai" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Lanai L2.PNG")}}" alt="lanai medium" id="lanai-medium">
-
       <img class="island unsolved kahoolawe-current kahoolawe" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Kahoolawe L1.PNG")}}" alt="kahoolawe unsolved" id="kahoolawe-light">
       <img class="island unsolved hide kahoolawe" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Kahoolawe.PNG")}}" alt="kahoolawe unsolved" id="kahoolawe-color">
       <img class="island hide medium kahoolawe" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Kahoolawe L2.PNG")}}" alt="kahoolawe unsolved" id="kahoolawe-medium">  
-
       <img class="island hide medium kauai" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Kauai L2.PNG")}}" alt="kauai medium" id="kauai-medium">
       <img class="island unsolved kauai-current kauai" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Kauai L1.PNG")}}" alt="kauai unsolved" id="kauai-light">
       <img class="island unsolved hide kauai" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Kauai.PNG")}}" alt="kauai unsolved" id="kauai-color">
-      
       <img class="island unsolved maui-current maui" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Mauai L1.PNG")}}" alt="maui unsolved" id="maui-light">
       <img class="island unsolved hide maui" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Maui.PNG")}}" alt="maui unsolved" id="maui-color">
       <img class="island hide medium maui" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Maui L2.PNG")}}" alt="maui unsolved" id="maui-medium">
-      
       <img class="island unsolved molokai-current molokai" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Molokai L1.PNG")}}" alt="molokai unsolved" id="molokai-light">
       <img class="island unsolved hide molokai" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Molokai.PNG")}}" alt="molokai unsolved" id="molokai-color">
       <img class="island hide medium molokai" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Molokai L2.PNG")}}" alt="molokai unsolved" id="molokai-medium">
-      
       <img class="island unsolved niihau-current niihau" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Niihau L1.PNG")}}" alt="niihau unsolved" id="niihau-light">
       <img class="island unsolved hide niihau" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Niihau.PNG")}}" alt="niihau unsolved" id="niihau-color">
       <img class="island hide medium niihau" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Niihau L2.PNG")}}" alt="niihau unsolved" id="niihau-medium">
-      
       <img class="island unsolved oahu-current oahu" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Oahu L1.PNG")}}" alt="oahu unsolved" id="oahu-light">
       <img class="island unsolved hide oahu" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Oahu.PNG")}}" alt="oahu unsolved" id="oahu-color">
       <img class="island hide medium oahu" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Oahu L2.PNG")}}" alt="oahu unsolved" id="oahu-medium">
-
       <img class="island unsolved canoe-current canoe" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Canoe L1.png")}}" alt="canoe unsolved" id="canoe-light">
       <img class="island unsolved hide canoe" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Canoe.PNG")}}" alt="canoe unsolved" id="canoe-color">
       <img class="island hide medium canoe" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Canoe L2.png")}}" alt="canoe unsolved" id="canoe-medium">
-
       <!-- SVG overlay for polygon -->
       <svg class="overlay-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 1620">
       <!-- Insert your polygon points here -->
@@ -189,27 +176,19 @@ modules:
       <polygon class="island kahoolawe" points="1413,822 1412,821 1412,819 1411,818 1411,817 1410,817 1409,816 1409,815 1407,813 1405,813 1404,812 1404,811 1405,810 1404,809 1405,808 1405,807 1406,806 1406,800 1405,799 1405,798 1402,795 1403,794 1402,793 1401,793 1399,791 1398,791 1397,790 1396,790 1393,787 1388,787 1387,788 1384,788 1383,789 1381,789 1378,792 1377,792 1375,794 1375,795 1373,797 1373,798 1372,799 1372,800 1371,801 1371,802 1370,803 1369,803 1368,804 1365,804 1364,805 1363,805 1358,810 1357,810 1356,811 1356,812 1355,813 1354,812 1353,813 1352,813 1351,814 1351,815 1350,816 1350,818 1352,820 1352,821 1353,822 1353,823 1354,824 1355,824 1359,828 1360,828 1361,829 1362,829 1363,830 1371,830 1372,831 1373,831 1374,832 1374,830 1375,829 1376,829 1377,830 1377,831 1383,831 1384,830 1385,830 1386,829 1388,829 1389,828 1390,829 1391,828 1392,829 1393,828 1394,828 1395,827 1396,828 1397,827 1398,828 1399,827 1400,828 1401,827 1402,828 1406,828 1407,829 1408,828 1409,828 1412,825 1412,823" fill="transparent" />
       <!-- Lanai -->
       <polygon class="island lanai" points="1239,674 1238,675 1237,675 1235,677 1234,677 1233,678 1232,678 1232,679 1231,680 1230,680 1231,681 1228,683 1228,686 1227,687 1227,690 1228,691 1228,692 1232,696 1233,696 1236,699 1237,699 1239,701 1240,701 1241,702 1242,702 1243,703 1244,703 1245,704 1246,704 1248,706 1248,707 1249,708 1249,709 1250,710 1250,711 1252,714 1252,725 1253,726 1253,731 1254,732 1254,736 1255,737 1255,739 1257,742 1257,746 1259,748 1260,748 1261,749 1263,749 1264,750 1266,750 1267,751 1271,751 1272,750 1277,750 1278,749 1282,749 1283,748 1285,748 1288,746 1290,746 1293,744 1296,744 1305,735 1306,735 1307,734 1308,734 1312,728 1313,728 1314,727 1316,727 1317,726 1317,725 1319,722 1319,714 1318,713 1318,712 1317,711 1317,710 1316,709 1314,709 1312,707 1312,706 1311,705 1311,704 1312,703 1313,704 1314,703 1313,702 1313,701 1312,700 1311,701 1310,700 1310,698 1302,690 1300,690 1299,689 1299,687 1297,685 1296,685 1294,683 1293,683 1292,682 1291,682 1290,681 1289,681 1288,680 1288,679 1283,674 1282,674 1281,673 1279,673 1278,672 1274,672 1273,671 1271,671 1270,672 1264,672 1263,673 1242,673 1241,674" fill="transparent" />
-
       <!-- Maui -->
       <polygon class="island maui" points="1353,656 1353,658 1357,661 1355,663 1352,660 1353,662 1352,663 1351,662 1349,667 1349,674 1351,677 1350,679 1354,686 1355,691 1361,702 1366,709 1377,718 1391,726 1401,730 1406,734 1412,735 1423,730 1425,731 1425,744 1427,748 1426,753 1428,761 1428,783 1429,786 1434,792 1438,795 1439,794 1440,796 1445,799 1447,798 1449,801 1464,804 1467,803 1470,798 1473,801 1482,798 1483,799 1493,797 1494,798 1498,796 1501,796 1503,794 1504,795 1512,790 1509,789 1507,787 1508,786 1516,784 1520,785 1521,787 1524,785 1525,786 1528,785 1537,787 1541,785 1552,783 1562,777 1570,769 1580,762 1587,755 1593,745 1593,742 1589,741 1591,739 1590,736 1587,737 1585,735 1586,733 1577,724 1565,715 1559,712 1546,710 1542,702 1539,699 1537,700 1534,698 1537,697 1535,697 1533,695 1531,696 1530,694 1525,694 1522,691 1520,686 1513,679 1513,677 1510,676 1507,673 1500,672 1494,668 1490,667 1489,669 1487,667 1478,667 1468,671 1463,676 1457,678 1455,677 1454,678 1444,677 1438,681 1427,684 1424,677 1417,671 1414,663 1411,661 1412,660 1405,648 1392,638 1380,634 1370,637 1370,642 1369,643 1367,642 1359,647 1358,650 1355,652" fill="transparent" />
-
       <!-- Molokai -->
       <polygon class="island molokai" points="1148,604 1153,611 1152,612 1153,616 1155,619 1160,623 1162,623 1163,622 1164,623 1166,623 1167,622 1168,623 1173,623 1174,622 1175,623 1177,623 1178,622 1192,622 1193,621 1194,622 1195,621 1199,621 1200,620 1210,620 1211,619 1216,619 1215,618 1216,617 1218,618 1222,618 1224,616 1226,617 1227,616 1232,616 1234,615 1236,617 1238,617 1239,618 1244,618 1245,619 1244,620 1246,621 1250,621 1252,623 1258,625 1257,624 1258,623 1264,622 1265,623 1270,624 1274,628 1275,626 1277,628 1276,630 1278,632 1287,632 1293,636 1294,635 1296,637 1303,637 1304,638 1305,637 1307,637 1309,635 1311,636 1313,634 1315,634 1321,628 1322,628 1322,627 1324,626 1326,623 1332,619 1332,618 1336,614 1335,613 1336,611 1339,611 1347,599 1347,588 1343,585 1342,586 1341,585 1339,586 1338,585 1336,585 1335,586 1330,586 1329,587 1327,586 1316,586 1315,585 1314,586 1311,586 1310,585 1309,586 1311,587 1308,590 1306,589 1306,586 1302,587 1304,587 1305,588 1303,589 1302,591 1300,588 1299,589 1295,589 1294,590 1293,589 1292,590 1287,590 1285,588 1280,586 1272,586 1270,585 1266,581 1267,579 1267,576 1266,576 1262,572 1262,571 1259,569 1256,570 1252,575 1252,578 1253,579 1251,581 1245,582 1241,580 1237,580 1236,581 1229,578 1221,577 1220,576 1215,576 1214,575 1213,576 1212,575 1202,575 1200,574 1199,575 1194,576 1192,573 1189,573 1182,569 1180,569 1176,566 1176,568 1175,569 1173,568 1172,566 1171,566 1170,567 1165,567 1162,569 1160,569 1160,572 1163,578 1165,580 1159,588 1159,591 1157,592 1156,591 1157,590 1148,600" fill="transparent" />
-
       <!-- Niihau -->
       <polygon class="island niihau" points="245,291 244,291 243,290 242,290 241,289 240,290 237,290 236,291 231,291 230,292 228,292 227,293 226,293 224,295 223,295 223,297 222,298 222,299 221,300 221,301 222,302 222,304 221,305 221,307 219,309 218,309 215,312 214,312 211,315 210,315 207,318 206,318 205,319 203,319 202,320 201,320 200,321 199,321 197,323 196,323 190,329 190,331 189,332 189,336 188,337 188,338 189,339 188,340 189,341 188,342 189,343 189,344 188,345 189,346 188,347 188,349 186,351 186,352 184,354 184,355 183,356 183,365 184,366 184,367 188,371 189,371 190,372 191,372 193,374 194,374 195,375 203,375 205,373 206,373 211,368 211,367 212,366 212,365 213,364 213,362 215,360 215,357 216,356 216,355 217,354 217,352 218,351 218,349 219,348 219,346 220,345 221,345 222,344 226,344 227,343 228,344 230,344 232,342 235,342 237,340 239,340 241,338 241,337 242,336 243,336 244,335 244,334 243,335 242,334 242,333 243,332 244,332 244,329 243,328 243,322 244,321 244,319 245,318 245,316 246,315 246,314 248,312 248,311 250,309 250,308 253,305 253,301 252,300 252,299 250,297 250,296 247,293 246,293 245,292" fill="transparent" />
-
       <!-- Oahu -->
       <polygon class="island oahu" points="830,438 830,440 831,439 832,440 831,442 833,446 837,449 838,453 848,459 849,467 846,475 846,479 852,487 856,490 862,492 860,494 864,499 863,500 864,507 869,513 874,515 877,518 877,525 879,531 892,545 896,547 900,547 901,548 904,547 905,548 913,546 915,547 922,546 924,545 927,539 928,541 930,540 931,542 926,545 928,544 930,545 934,543 935,544 936,543 941,543 945,545 950,543 951,544 954,543 958,540 962,540 968,551 975,554 979,558 983,560 984,559 987,560 988,559 989,560 990,559 991,560 992,559 993,560 994,559 995,560 1000,560 1001,559 1002,560 1005,558 1004,557 1005,554 1007,557 1014,553 1015,554 1017,553 1023,560 1029,555 1031,555 1039,545 1039,538 1037,533 1034,530 1028,528 1022,521 1023,520 1023,515 1021,510 1019,511 1018,508 1015,506 1017,504 1017,500 1014,494 1013,487 1010,484 1006,483 999,484 998,487 1002,496 996,501 988,495 976,482 980,473 977,465 978,460 974,449 970,447 967,440 962,436 960,432 960,422 957,416 947,406 942,403 935,395 930,393 929,394 925,394 913,404 910,405 907,409 907,412 902,422 889,434 890,436 889,438 885,435 886,434 884,434 871,441 870,440 863,442 854,440 853,441 847,439 833,439 832,440" fill="transparent" />
-
       <!-- Canoe -->
       <polygon class="island canoe" points="493,1369 490,1369 490,1371 478,1382 466,1390 465,1389 465,1381 463,1372 458,1358 455,1353 467,1338 471,1322 477,1308 477,1305 472,1294 469,1297 466,1305 461,1311 439,1323 433,1325 427,1320 425,1320 423,1322 423,1325 425,1327 424,1328 402,1335 399,1332 398,1333 397,1332 397,1329 397,1333 395,1336 393,1335 395,1332 392,1335 390,1332 389,1335 388,1333 387,1334 385,1333 384,1334 382,1332 379,1333 378,1330 377,1333 376,1332 373,1334 371,1333 370,1335 368,1333 367,1337 365,1338 364,1337 363,1339 362,1337 361,1338 360,1337 361,1339 358,1341 357,1347 356,1348 355,1346 356,1348 355,1350 351,1350 348,1347 345,1347 344,1348 345,1353 344,1354 337,1356 332,1359 320,1362 317,1364 305,1365 296,1361 294,1358 283,1353 287,1369 292,1371 305,1383 319,1389 331,1390 332,1391 347,1391 348,1392 353,1391 354,1394 355,1392 356,1393 356,1397 358,1398 361,1397 362,1398 360,1400 362,1402 362,1407 363,1402 366,1403 366,1406 369,1404 371,1406 373,1404 375,1406 377,1405 379,1411 379,1422 378,1423 354,1426 367,1429 383,1429 387,1427 398,1425 434,1413 450,1406 458,1401 465,1402 465,1398 467,1396 478,1390 484,1385 489,1378" fill="transparent" />
-
       </svg>
       </div>
       </div>
-
-
 
     challenges:
       - import:
