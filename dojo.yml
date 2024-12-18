@@ -84,6 +84,7 @@ modules:
       <h1 class="title">Challenge Title</h1>
       <h2 class="points">500</h2>
       <h2 class="num-solves">0</h2>
+      <h2 class="pwn-solves">0</h2>
       <p class="challenge-description">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non condimentum nunc, ut faucibus mauris. 
       </p>
@@ -212,6 +213,32 @@ modules:
       "oahu": "pwncrp",
       "canoe": "waa",
       };
+      const challenge_points = {
+      "tickeyhellman": 460,
+      "temple-of-soul": 500,
+      "slus-00000": 475,
+      "juniorust": 475,
+      "walk-in-the-park": 460,
+      "the-morris-worm": 489,
+      "orange": 500,
+      "mechanical-arm": 500,
+      "stutterstep": 489,
+      "pwncrp": 500,
+      "waa": 296,
+      };
+      const challenge_solves = {
+      "tickeyhellman": 4,
+      "temple-of-soul": 0,
+      "slus-00000": 3,
+      "juniorust": 3,
+      "walk-in-the-park": 4,
+      "the-morris-worm": 2,
+      "orange": 1,
+      "mechanical-arm": 1,
+      "stutterstep": 2,
+      "pwncrp": 0,
+      "waa": 18,
+      };
       var challengeIsland = {
       };
       Object.keys(islandChallenge).forEach(function(challenge_name) { 
@@ -239,8 +266,9 @@ modules:
       const challenge = challenges[challengeName];
       const points = challenge_points[challenge.challenge_id] || 500;
       $('#current-challenge .title').text(challenge.name);
-      $('#current-challenge .points').text(points);
-      $('#current-challenge .num-solves').text(challenge.solves);
+      $('#current-challenge .points').text(`Worth ${points} in CTF`);
+      $('#current-challenge .num-solves').text(`${challenge_solves[challenge.challenge_id]} solves during the CTF`);
+      $('#current-challenge .pwn-solves').text(`${challenge.solves} here`);
       $('#current-challenge .challenge-description').html(challenge.description);
       $('#current-challenge #module').val(challenge.module_id);
       $('#current-challenge #challenge').val(challenge.id);
