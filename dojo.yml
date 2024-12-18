@@ -273,16 +273,6 @@ modules:
       $('#current-challenge #module').val(challenge.module);
       $('#current-challenge #challenge').val(challenge.id);
       $('#current-challenge #challenge-id').val(challenge.challenge_id);
-      // Example Usage
-      onClassChange('#current-challenge #challenge-input', (element) => {
-      if ($(element).hasClass("correct"))
-      {
-        $(`#${island}-light`).removeClass(`${island}-current`);
-        $(`#${island}-color`).addClass(`${island}-current`);
-        $(`#${island}-light`).addClass("hide");
-        $(`#${island}-color`).removeClass("hide");
-      }
-      });
       }
       // Click logic for zoom
       polygon.addEventListener('click', function() {
@@ -374,6 +364,20 @@ modules:
       // Return the observer so it can be disconnected later if needed
       return observer;
       }
+      onClassChange('#current-challenge #challenge-input', (element) => {
+      var island = zoomedIsland;
+      if (zoomedIsland === null)
+      {
+        return;
+      }
+      if ($(element).hasClass("correct"))
+      {
+        $(`#${island}-light`).removeClass(`${island}-current`);
+        $(`#${island}-color`).addClass(`${island}-current`);
+        $(`#${island}-light`).addClass("hide");
+        $(`#${island}-color`).removeClass("hide");
+      }
+      });
       </script>
 
     challenges:
