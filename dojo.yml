@@ -126,41 +126,41 @@ modules:
       </div>
       <div class="island_container" id="island_container">
       <!-- Replace with your actual island PNG file -->
-      <img class="ocean" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Map Background With Ocean.JPG")}}" alt="Background" id="baseImage">
-      <img class="island big-island-crack" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Crack.PNG")}}" alt="lanai big-island-crack" id="big-island-crack">
-      <img class="island unsolved big-island-3 big-island-3-current" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Big Island Piece 3 L1.PNG")}}" alt="lanai big-island-3" id="big-island-3-light">
-      <img class="island unsolved big-island-3 hide" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Piece 3.PNG")}}" alt="lanai big-island-3" id="big-island-3-color">
-      <img class="island hide medium big-island-3" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Big Island Piece 3 L2.PNG")}}" alt="big-island-3" id="big-island-3-medium">
-      <img class="island unsolved big-island-2-current big-island-2" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Big Island Piece 2 L1.PNG")}}" alt="lanai big-island-2" id="big-island-2-light">
-      <img class="island unsolved hide big-island-2" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Piece 2.PNG")}}" alt="lanai big-island-2" id="big-island-2-color">
-      <img class="island hide medium big-island-2" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Big Island Piece 2 L2.PNG")}}" alt="big-island-2" id="big-island-2-medium">
-      <img class="island unsolved big-island-1-current big-island-1" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Big Island Piece 1 L1.PNG")}}" alt="lanai big-island-1" id="big-island-1-light">
-      <img class="island unsolved hide big-island-1" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Big Island Piece 1.PNG")}}" alt="lanai big-island-1" id="big-island-1-color">
-      <img class="island hide medium big-island-1" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Big Island Piece 1 L2.PNG")}}" alt="big-island-1" id="big-island-1-medium">
-      <img class="island unsolved lanai-current lanai" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Lanai L1.PNG")}}" alt="lanai unsolved" id="lanai-light">
-      <img class="island unsolved hide lanai" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Lanai.PNG")}}" alt="lanai unsolved" id="lanai-color">
-      <img class="island hide medimum lanai" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Lanai L2.PNG")}}" alt="lanai medium" id="lanai-medium">
-      <img class="island unsolved kahoolawe-current kahoolawe" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Kahoolawe L1.PNG")}}" alt="kahoolawe unsolved" id="kahoolawe-light">
-      <img class="island unsolved hide kahoolawe" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Kahoolawe.PNG")}}" alt="kahoolawe unsolved" id="kahoolawe-color">
-      <img class="island hide medium kahoolawe" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Kahoolawe L2.PNG")}}" alt="kahoolawe unsolved" id="kahoolawe-medium">  
-      <img class="island hide medium kauai" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Kauai L2.PNG")}}" alt="kauai medium" id="kauai-medium">
-      <img class="island unsolved kauai-current kauai" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Kauai L1.PNG")}}" alt="kauai unsolved" id="kauai-light">
-      <img class="island unsolved hide kauai" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Kauai.PNG")}}" alt="kauai unsolved" id="kauai-color">
-      <img class="island unsolved maui-current maui" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Mauai L1.PNG")}}" alt="maui unsolved" id="maui-light">
-      <img class="island unsolved hide maui" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Maui.PNG")}}" alt="maui unsolved" id="maui-color">
-      <img class="island hide medium maui" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Maui L2.PNG")}}" alt="maui unsolved" id="maui-medium">
-      <img class="island unsolved molokai-current molokai" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Molokai L1.PNG")}}" alt="molokai unsolved" id="molokai-light">
-      <img class="island unsolved hide molokai" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Molokai.PNG")}}" alt="molokai unsolved" id="molokai-color">
-      <img class="island hide medium molokai" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Molokai L2.PNG")}}" alt="molokai unsolved" id="molokai-medium">
-      <img class="island unsolved niihau-current niihau" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Niihau L1.PNG")}}" alt="niihau unsolved" id="niihau-light">
-      <img class="island unsolved hide niihau" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Niihau.PNG")}}" alt="niihau unsolved" id="niihau-color">
-      <img class="island hide medium niihau" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Niihau L2.PNG")}}" alt="niihau unsolved" id="niihau-medium">
-      <img class="island unsolved oahu-current oahu" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Oahu L1.PNG")}}" alt="oahu unsolved" id="oahu-light">
-      <img class="island unsolved hide oahu" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Oahu.PNG")}}" alt="oahu unsolved" id="oahu-color">
-      <img class="island hide medium oahu" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Oahu L2.PNG")}}" alt="oahu unsolved" id="oahu-medium">
-      <img class="island unsolved canoe-current canoe" src="{{ url_for("views.themes", path="img/dojo/challenges/light/Canoe L1.png")}}" alt="canoe unsolved" id="canoe-light">
-      <img class="island unsolved hide canoe" src="{{ url_for("views.themes", path="img/dojo/challenges/color/Canoe.PNG")}}" alt="canoe unsolved" id="canoe-color">
-      <img class="island hide medium canoe" src="{{ url_for("views.themes", path="img/dojo/challenges/medium/Canoe L2.png")}}" alt="canoe unsolved" id="canoe-medium">
+      <img class="ocean" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Map Background With Ocean.JPG" alt="Background" id="baseImage">
+      <img class="island big-island-crack" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Big Island Crack.PNG" alt="lanai big-island-crack" id="big-island-crack">
+      <img class="island unsolved big-island-3 big-island-3-current" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Big Island Piece 3 L1.PNG" alt="lanai big-island-3" id="big-island-3-light">
+      <img class="island unsolved big-island-3 hide" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Big Island Piece 3.PNG" alt="lanai big-island-3" id="big-island-3-color">
+      <img class="island hide medium big-island-3" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Big Island Piece 3 L2.PNG" alt="big-island-3" id="big-island-3-medium">
+      <img class="island unsolved big-island-2-current big-island-2" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Big Island Piece 2 L1.PNG" alt="lanai big-island-2" id="big-island-2-light">
+      <img class="island unsolved hide big-island-2" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Big Island Piece 2.PNG" alt="lanai big-island-2" id="big-island-2-color">
+      <img class="island hide medium big-island-2" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Big Island Piece 2 L2.PNG" alt="big-island-2" id="big-island-2-medium">
+      <img class="island unsolved big-island-1-current big-island-1" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Big Island Piece 1 L1.PNG" alt="lanai big-island-1" id="big-island-1-light">
+      <img class="island unsolved hide big-island-1" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Big Island Piece 1.PNG" alt="lanai big-island-1" id="big-island-1-color">
+      <img class="island hide medium big-island-1" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Big Island Piece 1 L2.PNG" alt="big-island-1" id="big-island-1-medium">
+      <img class="island unsolved lanai-current lanai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Lanai L1.PNG" alt="lanai unsolved" id="lanai-light">
+      <img class="island unsolved hide lanai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Lanai.PNG" alt="lanai unsolved" id="lanai-color">
+      <img class="island hide medimum lanai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Lanai L2.PNG" alt="lanai medium" id="lanai-medium">
+      <img class="island unsolved kahoolawe-current kahoolawe" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Kahoolawe L1.PNG" alt="kahoolawe unsolved" id="kahoolawe-light">
+      <img class="island unsolved hide kahoolawe" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Kahoolawe.PNG" alt="kahoolawe unsolved" id="kahoolawe-color">
+      <img class="island hide medium kahoolawe" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Kahoolawe L2.PNG" alt="kahoolawe unsolved" id="kahoolawe-medium">  
+      <img class="island hide medium kauai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Kauai L2.PNG" alt="kauai medium" id="kauai-medium">
+      <img class="island unsolved kauai-current kauai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Kauai L1.PNG" alt="kauai unsolved" id="kauai-light">
+      <img class="island unsolved hide kauai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Kauai.PNG" alt="kauai unsolved" id="kauai-color">
+      <img class="island unsolved maui-current maui" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Mauai L1.PNG" alt="maui unsolved" id="maui-light">
+      <img class="island unsolved hide maui" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Maui.PNG" alt="maui unsolved" id="maui-color">
+      <img class="island hide medium maui" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Maui L2.PNG" alt="maui unsolved" id="maui-medium">
+      <img class="island unsolved molokai-current molokai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Molokai L1.PNG" alt="molokai unsolved" id="molokai-light">
+      <img class="island unsolved hide molokai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Molokai.PNG" alt="molokai unsolved" id="molokai-color">
+      <img class="island hide medium molokai" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Molokai L2.PNG" alt="molokai unsolved" id="molokai-medium">
+      <img class="island unsolved niihau-current niihau" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Niihau L1.PNG" alt="niihau unsolved" id="niihau-light">
+      <img class="island unsolved hide niihau" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Niihau.PNG" alt="niihau unsolved" id="niihau-color">
+      <img class="island hide medium niihau" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Niihau L2.PNG" alt="niihau unsolved" id="niihau-medium">
+      <img class="island unsolved oahu-current oahu" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Oahu L1.PNG" alt="oahu unsolved" id="oahu-light">
+      <img class="island unsolved hide oahu" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Oahu.PNG" alt="oahu unsolved" id="oahu-color">
+      <img class="island hide medium oahu" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Oahu L2.PNG" alt="oahu unsolved" id="oahu-medium">
+      <img class="island unsolved canoe-current canoe" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/light/Canoe L1.png" alt="canoe unsolved" id="canoe-light">
+      <img class="island unsolved hide canoe" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/color/Canoe.PNG" alt="canoe unsolved" id="canoe-color">
+      <img class="island hide medium canoe" src="https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/medium/Canoe L2.png" alt="canoe unsolved" id="canoe-medium">
       <!-- SVG overlay for polygon -->
       <svg class="overlay-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 1620">
       <!-- Insert your polygon points here -->
