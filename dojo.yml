@@ -14,8 +14,8 @@ modules:
       .island_container {
       position: relative;
       display: inline-block;
-      width: 70%;
-      height: 70%;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       transition: transform 0.5s ease;
       transform-origin: top left;
@@ -51,7 +51,7 @@ modules:
       height: 100%;
       }
       .overlay-svg .island:hover {
-      cursor: url("data:image/png;base64,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") 32 64, auto;
+      cursor: url("https://acsac-2024-ctf.s3.us-west-2.amazonaws.com/maui_hook.png") 32 64, auto;
       }
       #current-challenge {
       position: absolute;
@@ -189,6 +189,95 @@ modules:
       </svg>
       </div>
       </div>
+      <script>
+      const islands = ['big-island-1', 'big-island-2', 'big-island-3', 'kahoolawe', 'kauai', 'lanai', 'maui', 'molokai', 'niihau', 'oahu', 'canoe'];
+      const baseImage = document.getElementById('baseImage');
+      const container = document.getElementById('island_container');
+      var zoomedIsland = null;
+      var challenge_id_to_name = {};
+      const islandChallenge = {
+      "big-island-1": "tickeyhellman",
+      "big-island-2": "temple-of-soul",
+      "big-island-3": "slus-00000",
+      "kahoolawe": "juniorust",
+      "kauai": "walk-in-the-park",
+      "lanai": "the-morris-worm",
+      "maui": "orange",
+      "molokai": "mechanical-arm",
+      "niihau": "stutterstep",
+      "oahu": "pwncrp",
+      "canoe": "waa",
+      };
+      var challengeIsland = {
+      };
+      Object.keys(islandChallenge).forEach(function(challenge_name) { 
+      challengeIsland[islandChallenge[challenge_name]] = challenge_name;
+      });
+      function zoomOut() {
+      if (zoomedIsland !== null)
+      {
+          container.style.transform = 'none';
+          $(`#current-challenge`).addClass("hide");
+          zoomedIsland = null;
+      }
+      }
+      islands.forEach(function(island) {
+      const polygon = document.querySelector(`.overlay-svg .${island}`);
+      $(polygon).hover(
+        function() {
+          $(`#${island}-medium`).toggleClass("hide");
+          $(`.${island}-current`).toggleClass("hide");
+        }
+      );
+      // Click logic for zoom
+      polygon.addEventListener('click', function() {
+          if (zoomedIsland !== null)
+          {
+              zoomOut();
+          }
+          else
+          {
+              // Parse polygon points
+              const pointsAttr = polygon.getAttribute('points');
+              const points = pointsAttr.trim().split(/\s+/).map(p => {
+                  const [x, y] = p.split(',').map(Number);
+                  return {x, y};
+              });
+              // Compute centroid (or bounding box center)
+              let sumX = 0, sumY = 0;
+              points.forEach(pt => {
+                  sumX += pt.x;
+                  sumY += pt.y;
+              });
+              const zoomFactor = 3;
+              const centroidX = sumX / points.length;
+              const centroidY = sumY / points.length;
+              const displayedWidth = baseImage.clientWidth;
+              const displayedHeight = baseImage.clientHeight;
+              const originalWidth = baseImage.naturalWidth;
+              const originalHeight = baseImage.naturalHeight;
+              const xScale = displayedWidth / originalWidth;
+              const yScale = displayedHeight / originalHeight;
+              const displayedCentroidX = centroidX * xScale;
+              const displayedCentroidY = centroidY * yScale;
+              const translationX = (displayedCentroidX * zoomFactor) - (window.innerWidth / 2);
+              const translationY = (displayedCentroidY * zoomFactor) - (window.innerHeight / 2);
+              const finalTranslateX = -translationX;
+              const finalTranslateY = -translationY;
+              container.style.transform = `translate(${finalTranslateX}px, ${finalTranslateY}px) scale(${zoomFactor})`;
+              addChallenge(island);
+              $(`#current-challenge`).removeClass("hide");
+              zoomedIsland = island;
+          }
+      });      
+      });
+      // Listen for Escape key to zoom out if currently zoomed in
+      document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+          zoomOut();
+      }
+      });
+      </script>
 
     challenges:
       - import:
