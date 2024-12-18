@@ -310,9 +310,9 @@ modules:
           
           Use `/console/run` to run the game and `/challenge/solve` to submit game flag for real flag.
 
-       - id: walk-in-the-park
-         name: walk-in-the-park
-         image: adamdoupe/walk-in-the-park
+      - id: walk-in-the-park
+        name: walk-in-the-park
+        image: adamdoupe/walk-in-the-park
       - id: mechanical-arm
         name: mechanical-arm
         image: adamdoupe/arm-rop
@@ -370,13 +370,3 @@ modules:
         name: stutterstep
       - id: orange
         name: orange
-
-
-
-
-
-
-
-
-
-
