@@ -23,4 +23,4 @@ sed -i 's/TODO_REPLACE_WITH_FLAG_COMMAND/send_cmd "echo '"$FLAG"' > \/flag"/g' r
 echo "Going to start the challenge, should be running on port 79 (might take a bit to start up)"
 echo "Press Control-C to kill the challenge"
 trap "kill 0" SIGINT
-expect ./run.exp 2> /dev/null > /dev/null
+expect -n ./run.exp 2> /dev/null > /dev/null
