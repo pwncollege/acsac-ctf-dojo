@@ -217,6 +217,7 @@ modules:
       Object.keys(islandChallenge).forEach(function(challenge_name) { 
       challengeIsland[islandChallenge[challenge_name]] = challenge_name;
       });
+      var challenges = {};
       function zoomOut() {
       if (zoomedIsland !== null)
       {
@@ -236,11 +237,10 @@ modules:
       function addChallenge(island) {
       const challengeName = islandChallenge[island];
       const challenge = challenges[challengeName];
-      const numSolves = challenge_solve_count[challenge.challenge_id] || 0;
       const points = challenge_points[challenge.challenge_id] || 500;
       $('#current-challenge .title').text(challenge.name);
       $('#current-challenge .points').text(points);
-      $('#current-challenge .num-solves').text(numSolves);
+      $('#current-challenge .num-solves').text(challenge.solves);
       $('#current-challenge .challenge-description').html(challenge.description);
       $('#current-challenge #module').val(challenge.module_id);
       $('#current-challenge #challenge').val(challenge.id);
