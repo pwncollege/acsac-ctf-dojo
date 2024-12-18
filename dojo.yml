@@ -9,7 +9,7 @@ award:
 
 modules:
   - id: challenges
-    name: PUBLIC ACSAC 2024 CTF Challenges
+    name: ACSAC 2024 CTF Challenges
     allow_privileged: true
     visibility:
       start: "2025-08-28T20:00:00-07:00"
