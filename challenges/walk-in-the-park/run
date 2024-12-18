@@ -1,4 +1,4 @@
-#!/usr/bin/env bash-suid
+#!/usr/bin/env -iS bash-suid
 
 umask 066
 cd /opt/walk-in-the-park/xv6-riscv

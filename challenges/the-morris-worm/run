@@ -1,4 +1,4 @@
-#!/usr/bin/env bash-suid
+#!/usr/bin/env -iS bash-suid
 
 # Read in /flag
 FLAG=$(cat /flag)
