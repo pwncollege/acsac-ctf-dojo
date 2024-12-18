@@ -294,6 +294,9 @@ modules:
           zoomOut();
       }
       });
+      $( document ).ready(function () {
+        const test = "";
+      });
       </script>
 
     challenges:
