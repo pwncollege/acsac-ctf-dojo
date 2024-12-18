@@ -83,8 +83,8 @@ modules:
       <div class="hide" id="current-challenge">
       <h1 class="title">Challenge Title</h1>
       <h2 class="pwn-solves">0</h2>
-      <h3 class="points">500</h2>
-      <h3 class="num-solves">0</h2>
+      <h4 class="points">500</h4>
+      <h4 class="num-solves">0</h4>
       <p class="challenge-description">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non condimentum nunc, ut faucibus mauris. 
       </p>
@@ -268,7 +268,7 @@ modules:
       $('#current-challenge .title').text(challenge.name);
       $('#current-challenge .points').text(`Worth ${points} points in CTF`);
       $('#current-challenge .num-solves').text(`${challenge_solves[challenge.id]} solves during the CTF`);
-      $('#current-challenge .pwn-solves').text(`${challenge.solves} here`);
+      $('#current-challenge .pwn-solves').text(`${challenge.solves}`);
       $('#current-challenge .challenge-description').html(challenge.description);
       $('#current-challenge #module').val(challenge.module);
       $('#current-challenge #challenge').val(challenge.id);
