@@ -266,13 +266,13 @@ modules:
       const challenge = challenges[challengeName];
       const points = challenge_points[challenge.id] || 500;
       $('#current-challenge .title').text(challenge.name);
-      $('#current-challenge .points').text(`Worth ${points} in CTF`);
+      $('#current-challenge .points').text(`Worth ${points} points in CTF`);
       $('#current-challenge .num-solves').text(`${challenge_solves[challenge.id]} solves during the CTF`);
       $('#current-challenge .pwn-solves').text(`${challenge.solves} here`);
       $('#current-challenge .challenge-description').html(challenge.description);
-      $('#current-challenge #module').val(challenge.module_id);
-      $('#current-challenge #challenge').val(challenge.challenge_id);
-      $('#current-challenge #challenge-id').val(challenge.id);
+      $('#current-challenge #module').val(challenge.module);
+      $('#current-challenge #challenge').val(challenge.id);
+      $('#current-challenge #challenge-id').val(challenge.challenge_id);
       }
       // Click logic for zoom
       polygon.addEventListener('click', function() {
@@ -335,6 +335,14 @@ modules:
                 name: chall.find(".challenge-name").text(),
                 solved: chall.find(".challenge-unsolved").length == 0,
             };
+            if (challenge.solved)
+            {
+                const island = challengeIsland[challenge.id];
+                $(`#${island}-light`).removeClass(`${island}-current`);
+                $(`#${island}-color`).addClass(`${island}-current`);
+                $(`#${island}-light`).addClass("hide");
+                $(`#${island}-color`).removeClass("hide");
+            }
             challenges[challenge.id] = challenge;
         });
       });
