@@ -407,11 +407,18 @@ modules:
         name: slus-00000
         image: adamdoupe/slus-test
         description: |
+          ## Hilo
+
+          - Category: `game-hacking`, `PS1` 
+          - Author: `DaveZero`
+
+          Have you ever seen the Hilo Harbor? With all those shipping containers, it's like they're playing Tetris...
+
           I wonder what happens when I manage to clear 99999 lines...
           (Game flag is entirely in capitals)
-          
+
           The games is in `/games/slus00000.elf`.
-          
+
           Use `/console/run` to run the game and `/challenge/solve` to submit game flag for real flag.
 
       - id: walk-in-the-park
