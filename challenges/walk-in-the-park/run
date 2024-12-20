@@ -1,4 +1,4 @@
-#!/usr/bin/exec-suid -- /bin/bash -p
+#!/usr/bin/exec-suid --real -- /bin/bash -p
 
 export PATH=/run/challenge/bin:/run/workspace/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 umask 066
