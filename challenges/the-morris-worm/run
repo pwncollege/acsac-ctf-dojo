@@ -1,5 +1,6 @@
-#!/usr/bin/env -iS bash-suid
+#!/usr/bin/exec-suid -- /bin/bash -p
 
+export PATH=/run/challenge/bin:/run/workspace/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # Read in /flag
 FLAG=$(cat /flag)
 

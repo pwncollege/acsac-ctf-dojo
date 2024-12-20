@@ -1,5 +1,6 @@
-#!/usr/bin/env -iS bash-suid
+#!/usr/bin/exec-suid -- /bin/bash -p
 
+export PATH=/run/challenge/bin:/run/workspace/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 umask 066
 cd /opt/walk-in-the-park/xv6-riscv
 /opt/walk-in-the-park/gen.sh > /opt/walk-in-the-park/xv6-riscv/user/rand
