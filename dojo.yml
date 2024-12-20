@@ -17,6 +17,7 @@ modules:
     description: |
       Welcome to the archive of the first-ever [2024 ACSAC Capture the Flag (CTF)](https://www.acsac.org/2024/venue/), celebrating 40 years of ACSAC. In this special edition CTF, we honor the Hawaiian culture by following the legend of <a href="https://en.wikipedia.org/wiki/M%C4%81ui_(Hawaiian_mythology)">Māui</a>, the Hawaiian demi-god. Using his magical fishing hook, <a href="https://hawaiialive.org/manaiakalani/">Manaiakalani</a>, Māui fished the Hawaiian Islands out of the ocean and created the islands we know today. Help Māui pull each island out of the ocean by solving challenges, literally creating the map we know and love.
 
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <div style="display: flex; justify-content: center; position: relative; padding-bottom: 15ex;">
       <style>
       .island_container {
