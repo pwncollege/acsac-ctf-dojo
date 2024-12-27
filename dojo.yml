@@ -86,6 +86,7 @@ modules:
       }
       </style>
       <div class="hide" id="current-challenge">
+      <span class="close" onclick="zoomOut()">X</span>
       <h1 class="title">Challenge Title</h1>
       <h2 class="pwn-solves">0</h2>
       <h4 class="points">500</h4>
