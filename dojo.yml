@@ -8,7 +8,7 @@ award:
   emoji: 🌴
 
 modules:
-  - id: challenges_25
+  - id: challenges-25
     name: ACSAC 2025 CTF Challenges
     allow_privileged: true
     description: |
