@@ -799,6 +799,7 @@ modules:
     challenges:
       - id: pwncrp
         name: pwncrp
+        required: false
       - id: slus-00000
         name: slus-00000
         image: adamdoupe/slus-test
