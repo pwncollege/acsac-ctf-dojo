@@ -17,17 +17,17 @@ modules:
       Help Hawaiʻiloa across the Pacific toward Hawaiʻi, one constellation at a time.
     
       #### CTF created by:
-      Zion Leonahenahe Basque, Arizona State University, CTF Ali'i
-      Will Rosenberg, Arizona State University
-      Wil Gibbs, Arizona State University
-      Siddharth Mishra, Arizona State University
-      Pulkit Singh Singaria, Arizona State University
-      Pratham Gupta, Arizona State University
-      Nathan Wong, University of Hawaiʻi at Mānoa
-      Hulin Wang, Arizona State University
-      Ethan Morrell, University of Hawaiʻi at Mānoa
-      Caden Sounart, Arizona State University
-      Ahmad Samara, Arizona State University
+      - Zion Leonahenahe Basque, Arizona State University, CTF Ali'i
+      - Will Rosenberg, Arizona State University
+      - Wil Gibbs, Arizona State University
+      - Siddharth Mishra, Arizona State University
+      - Pulkit Singh Singaria, Arizona State University
+      - Pratham Gupta, Arizona State University
+      - Nathan Wong, University of Hawaiʻi at Mānoa
+      - Hulin Wang, Arizona State University
+      - Ethan Morrell, University of Hawaiʻi at Mānoa
+      - Caden Sounart, Arizona State University
+      - Ahmad Samara, Arizona State University
 
     challenges:
       - id: panana
