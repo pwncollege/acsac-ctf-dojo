@@ -15,6 +15,450 @@ modules:
       Welcome to the second-ever ACSAC <a href="https://ctftime.org/ctf-wtf/">Capture the Flag (CTF)</a>, celebrating the 41st year of ACSAC.
       This year’s narrative follows the legendary voyager Hawaiʻiloa, who is said to have discovered the Hawaiian Islands by navigating the stars.
       Help Hawaiʻiloa across the Pacific toward Hawaiʻi, one constellation at a time.
+
+      Start with the starter challenge (the compass).
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <div style="display:flex; justify-content:center; position:relative; padding-bottom:15ex;">
+
+        <style>
+          .island_container{
+            position:relative;
+            display:inline-block;
+            width:70%;
+            height:auto;
+            overflow:hidden;
+            transition:transform 0.5s ease;
+            transform-origin:top left;
+            max-width:100%;
+          }
+          .island_container .ocean{ display:block; width:100%; height:auto; }
+          .hide{ display:none; }
+          .island_container .island{ position:absolute; top:0; left:0; width:100%; height:auto; }
+          .overlay-svg{ position:absolute; top:0; left:0; z-index:100; width:100%; height:100%; }
+          .overlay-svg .island:hover{ cursor:pointer; }
+
+          #current-challenge{
+            position:absolute;
+            top:0; left:0;
+            margin-left:15%;
+            margin-top:10%;
+            width:70%;
+            height:auto;
+            z-index:1000;
+            background:rgba(26,41,66,0.85);
+            padding:2em;
+            color:#fff;
+          }
+          #current-challenge .close{
+            position:absolute;
+            top:0.6em;
+            right:0.8em;
+            font-weight:bold;
+            cursor:pointer;
+            user-select:none;
+          }
+          #current-challenge p, #current-challenge h1, #current-challenge h2,
+          #current-challenge h3, #current-challenge h4{ color:#ffffff !important; }
+          #current-challenge a{ color:#7090a3 !important; }
+          #challenge-input{ color:#ffffff !important; }
+        </style>
+
+        <div class="hide" id="current-challenge">
+          <span class="close" onclick="zoomOut()">X</span>
+
+          <h1 class="title">Challenge Title</h1>
+          <h4 class="points">Worth 0 points</h4>
+          <h4 class="num-solves">0 solves</h4>
+
+          <p class="challenge-description">Click a constellation to view its challenge.</p>
+
+          <div class="container">
+            <div class="accordion accordion-item" id="challenges">
+              <div class="row">
+                <div class="col-sm-6 form-group text-center">
+                  <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary w-100">
+                    <span class="d-sm-block d-md-block d-lg-block">
+                      <i class="fas fa-play fa-2x pr-3"></i>Start
+                    </span>
+                  </button>
+                </div>
+                <div class="col-sm-6 form-group text-center">
+                  <button id="challenge-practice" type="submit" class="btn btn-md btn-outline-secondary w-100">
+                    <span class="d-sm-block d-md-block d-lg-block">
+                      <i class="fas fa-flask fa-2x pr-3"></i>Practice
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row submit-row">
+                <div class="col-md-9 form-group">
+                  <input id="module" type="hidden" value="">
+                  <input id="challenge" type="hidden" value="">
+                  <input id="challenge-id" type="hidden" value="">
+                  <input id="challenge-input" class="challenge-input form-control" type="text" name="answer" placeholder="Flag">
+                </div>
+                <div class="col-md-3 form-group key-submit">
+                  <button id="challenge-submit" type="submit"
+                          class="challenge-submit btn btn-md btn-outline-secondary float-right w-100 h-100">
+                    Submit
+                  </button>
+                </div>
+              </div>
+
+              <div class="row notification-row">
+                <div class="col-md-12">
+                  <div id="result-notification" class="alert alert-dismissable text-center w-100"
+                       role="alert" style="display:none;">
+                    <strong id="result-message"></strong>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="island_container" id="island_container">
+
+          <img class="ocean"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/Background_flip.png?raw=true"
+               alt="Star map background"
+               id="baseImage">
+
+          <img class="island unsolved halulu-current halulu"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/halulu_L1.png?raw=true"
+               alt="Halulu unsolved" id="halulu-light">
+          <img class="island unsolved hide halulu"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/halulu_L3.png?raw=true"
+               alt="Halulu solved" id="halulu-color">
+          <img class="island hide medium halulu"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/halulu_L2.png?raw=true"
+               alt="Halulu medium" id="halulu-medium">
+
+          <img class="island unsolved hokupaa-current hokupaa"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/hokupaa_L1.png?raw=true"
+               alt="Hokupaa unsolved" id="hokupaa-light">
+          <img class="island unsolved hide hokupaa"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/hokupaa_L3.png?raw=true"
+               alt="Hokupaa solved" id="hokupaa-color">
+          <img class="island hide medium hokupaa"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/hokupaa_L2.png?raw=true"
+               alt="Hokupaa medium" id="hokupaa-medium">
+
+          <img class="island unsolved iwakelii-current iwakelii"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/iwakelii_L1.png?raw=true"
+               alt="Iwakelii unsolved" id="iwakelii-light">
+          <img class="island unsolved hide iwakelii"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/iwakelii_L3.png?raw=true"
+               alt="Iwakelii solved" id="iwakelii-color">
+          <img class="island hide medium iwakelii"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/iwakelii_L2.png?raw=true"
+               alt="Iwakelii medium" id="iwakelii-medium">
+
+          <img class="island unsolved ka-heihei-ona-keiki-current ka-heihei-ona-keiki"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka-hei-hei-ona-keiki_L1.png?raw=true"
+               alt="Ka hei-hei ona keiki unsolved" id="ka-heihei-ona-keiki-light">
+          <img class="island unsolved hide ka-heihei-ona-keiki"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/ka-hei-hei-ona-keiki_L3.png?raw=true"
+               alt="Ka hei-hei ona keiki solved" id="ka-heihei-ona-keiki-color">
+          <img class="island hide medium ka-heihei-ona-keiki"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka-hei-hei-ona-keiki_L2.png?raw=true"
+               alt="Ka hei-hei ona keiki medium" id="ka-heihei-ona-keiki-medium">
+
+          <img class="island unsolved ka-lupe-o-kawelo-current ka-lupe-o-kawelo"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka-lupe-o-kawelo_L1.png?raw=true"
+               alt="Ka lupe o Kawelo unsolved" id="ka-lupe-o-kawelo-light">
+          <img class="island unsolved hide ka-lupe-o-kawelo"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/ka-lupe-o-kawelo_L3.png?raw=true"
+               alt="Ka lupe o Kawelo solved" id="ka-lupe-o-kawelo-color">
+          <img class="island hide medium ka-lupe-o-kawelo"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka-lupe-o-kawelo_L2.png?raw=true"
+               alt="Ka lupe o Kawelo medium" id="ka-lupe-o-kawelo-medium">
+
+          <img class="island unsolved ka-moi-current ka-moi"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka_moi_L1.png?raw=true"
+               alt="Ka moi unsolved" id="ka-moi-light">
+          <img class="island unsolved hide ka-moi"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/ka_moi_L3.png?raw=true"
+               alt="Ka moi solved" id="ka-moi-color">
+          <img class="island hide medium ka-moi"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka_moi_L2.png?raw=true"
+               alt="Ka moi medium" id="ka-moi-medium">
+
+          <img class="island unsolved kaahupahau-current kaahupahau"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/kaahupahau_L1.png?raw=true"
+               alt="Kaahupahau unsolved" id="kaahupahau-light">
+          <img class="island unsolved hide kaahupahau"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/kaahupahau_L3.png?raw=true"
+               alt="Kaahupahau solved" id="kaahupahau-color">
+          <img class="island hide medium kaahupahau"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/kaahupahau_L2.png?raw=true"
+               alt="Kaahupahau medium" id="kaahupahau-medium">
+
+          <img class="island unsolved kukalaniehu-current kukalaniehu"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/kukalaniehu_L1.png?raw=true"
+               alt="Kukalaniehu unsolved" id="kukalaniehu-light">
+          <img class="island unsolved hide kukalaniehu"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/kukalaniehu_L3.png?raw=true"
+               alt="Kukalaniehu solved" id="kukalaniehu-color">
+          <img class="island hide medium kukalaniehu"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/kukalaniehu_L2.png?raw=true"
+               alt="Kukalaniehu medium" id="kukalaniehu-medium">
+
+          <img class="island unsolved manaiakalani-current manaiakalani"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/manaiakalani_L1.png?raw=true"
+               alt="Manaiakalani unsolved" id="manaiakalani-light">
+          <img class="island unsolved hide manaiakalani"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/manaiakalani_L3.png?raw=true"
+               alt="Manaiakalani solved" id="manaiakalani-color">
+          <img class="island hide medium manaiakalani"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/manaiakalani_L2.png?raw=true"
+               alt="Manaiakalani medium" id="manaiakalani-medium">
+
+          <img class="island unsolved compass-current compass"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/compass_L1.png?raw=true"
+               alt="Compass unsolved" id="compass-light">
+          <img class="island unsolved hide compass"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/color/compass_L3.png?raw=true"
+               alt="Compass solved" id="compass-color">
+          <img class="island hide medium compass"
+               src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/compass_L2.png?raw=true"
+               alt="Compass medium" id="compass-medium">
+
+          <svg class="overlay-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1423">
+            <polygon class="island ka-heihei-ona-keiki"
+                     points="40,524 235,46 238,42 239,41 241,40 423,175 428,181 428,187 290,611 286,618 45,538 40,536"
+                     fill="transparent" />
+            <polygon class="island halulu"
+                     points="58,1090 61,1088 191,1022 193,1021 496,1080 501,1081 518,1090 534,1210 212,1364 209,1364 207,1362"
+                     fill="transparent" />
+            <polygon class="island kaahupahau"
+                     points="1259,925 1262,922 1344,897 1350,897 1354,899 1358,902 1439,1000 1439,1002 1416,1255 1415,1257 1342,1336 1340,1338 1336,1338 1333,1337 1331,1335 1285,1200"
+                     fill="transparent" />
+            <polygon class="island ka-lupe-o-kawelo"
+                     points="533,875 708,679 711,676 713,675 718,674 1156,854 1157,855 1158,859 1193,1029 1193,1032 1074,1307 1072,1309 1069,1311 1063,1313 925,1313 921,1311 534,881"
+                     fill="transparent" />
+            <polygon class="island hokupaa"
+                     points="1384,95 1385,91 1386,88 1391,74 1896,148 1899,150 1900,151 1957,230 1957,239 1954,245 1800,312 1614,242 1490,181 1395,117 1386,103 1385,101 1384,96"
+                     fill="transparent" />
+            <polygon class="island kukalaniehu"
+                     points="502,779 526,294 528,291 530,290 534,291 537,294 578,623 552,749 507,783 504,782 502,780"
+                     fill="transparent" />
+            <polygon class="island iwakelii"
+                     points="810,283 822,93 833,96 836,101 1101,557 1103,562 1104,566 1104,580 909,575 897,570 894,563 811,300 810,296"
+                     fill="transparent" />
+            <polygon class="island ka-moi"
+                     points="1161,265 1162,265 1168,266 1451,414 1454,418 1584,608 1586,611 1587,613 1587,619 1458,805 1456,805 1452,804 1450,803 1279,603 1277,599 1161,272"
+                     fill="transparent" />
+            <polygon class="island manaiakalani"
+                     points="1486,914 1488,903 1494,893 1525,865 1536,856 1571,839 1955,704 1963,716 1964,758 1961,772 1932,867 1930,870 1916,886 1657,1000 1597,996 1522,973"
+                     fill="transparent" />
+            <polygon class="island compass"
+                     points="1597,1151 1786,974 1811,974 1989,1149 1992,1166 1991,1173 1891,1272 1804,1355 1791,1356 1703,1272 1606,1175 1597,1152"
+                     fill="transparent" />
+          </svg>
+        </div>
+      </div>
+
+      <script>
+      const islands = [
+        "halulu",
+        "hokupaa",
+        "iwakelii",
+        "ka-heihei-ona-keiki",
+        "ka-lupe-o-kawelo",
+        "ka-moi",
+        "kaahupahau",
+        "kukalaniehu",
+        "manaiakalani",
+        "compass"
+      ];
+
+      const baseImage = document.getElementById("baseImage");
+      const container = document.getElementById("island_container");
+      let zoomedIsland = null;
+
+      const islandChallenge = {
+        "halulu": "halulu",
+        "hokupaa": "postmortem",
+        "iwakelii": "iwakelii",
+        "ka-heihei-ona-keiki": "kaheiheionakeiki",
+        "ka-lupe-o-kawelo": "kalupeokawelo",
+        "ka-moi": "kamoi",
+        "kaahupahau": "stargazer",
+        "kukalaniehu": "doubleblindside",
+        "manaiakalani": "manaiakalani",
+        "compass": "panana"
+      };
+
+      const challengeIsland = {};
+      Object.keys(islandChallenge).forEach((k) => { challengeIsland[islandChallenge[k]] = k; });
+
+      let challenges = {};
+
+      function getSolveCount(challengeObj) {
+        try {
+          if (typeof challenge_solve_count !== "undefined" && challengeObj && challengeObj.challenge_id != null) {
+            return challenge_solve_count[challengeObj.challenge_id] || 0;
+          }
+        } catch (e) {}
+        return (challengeObj && (challengeObj.solves || challengeObj.num_solves || 0)) || 0;
+      }
+
+      function getPoints(challengeObj) {
+        try {
+          if (typeof challenge_points !== "undefined" && challengeObj && challengeObj.challenge_id != null) {
+            return challenge_points[challengeObj.challenge_id] || 500;
+          }
+        } catch (e) {}
+        return (challengeObj && (challengeObj.points || 500)) || 500;
+      }
+
+      async function fetchChallenges(apiUrl) {
+        try {
+          const resp = await fetch(apiUrl);
+          if (!resp.ok) throw new Error(`Failed to fetch challenges: ${resp.statusText}`);
+          const list = await resp.json();
+          const map = {};
+          list.forEach((c) => { if (c && c.id) map[c.id] = c; });
+          return map;
+        } catch (e) {
+          console.error(e);
+          return {};
+        }
+      }
+
+      function zoomOut() {
+        if (zoomedIsland !== null) {
+          container.style.transform = "none";
+          $("#current-challenge").addClass("hide");
+          zoomedIsland = null;
+        }
+      }
+      window.zoomOut = zoomOut;
+
+      function setSolvedVisual(island) {
+        $(`#${island}-light`).removeClass(`${island}-current`).addClass("hide");
+        $(`#${island}-color`).addClass(`${island}-current`).removeClass("hide");
+      }
+
+      function addChallenge(island) {
+        const challengeKey = islandChallenge[island];
+        const challenge = challenges[challengeKey];
+
+        if (!challenge) {
+          $("#current-challenge .title").text(`Unknown challenge for "${island}"`);
+          $("#current-challenge .points").text("");
+          $("#current-challenge .num-solves").text("");
+          $("#current-challenge .challenge-description").html("No data loaded yet.");
+          return;
+        }
+
+        const points = getPoints(challenge);
+        const solves = getSolveCount(challenge);
+
+        $("#current-challenge .title").text(challenge.name || challenge.id || challengeKey);
+        $("#current-challenge .points").text(`Worth ${points} points`);
+        $("#current-challenge .num-solves").text(`${solves} solves`);
+        $("#current-challenge .challenge-description").html(challenge.description || "");
+
+        $("#current-challenge #module").val(challenge.module_id || challenge.module || "");
+        $("#current-challenge #challenge").val(challenge.id || "");
+        $("#current-challenge #challenge-id").val(challenge.challenge_id || "");
+      }
+
+      function zoomToPolygon(polygon) {
+        const pointsAttr = polygon.getAttribute("points");
+        const pts = pointsAttr.trim().split(/\\s+/).map((p) => {
+          const parts = p.split(",");
+          return { x: Number(parts[0]), y: Number(parts[1]) };
+        });
+
+        let sumX = 0, sumY = 0;
+        pts.forEach((pt) => { sumX += pt.x; sumY += pt.y; });
+
+        const zoomFactor = 3;
+        const centroidX = sumX / pts.length;
+        const centroidY = sumY / pts.length;
+
+        const displayedWidth = baseImage.clientWidth;
+        const displayedHeight = baseImage.clientHeight;
+        const originalWidth = baseImage.naturalWidth;
+        const originalHeight = baseImage.naturalHeight;
+
+        const xScale = displayedWidth / originalWidth;
+        const yScale = displayedHeight / originalHeight;
+
+        const displayedCentroidX = centroidX * xScale;
+        const displayedCentroidY = centroidY * yScale;
+
+        const translationX = (displayedCentroidX * zoomFactor) - (window.innerWidth / 2);
+        const translationY = (displayedCentroidY * zoomFactor) - (window.innerHeight / 2);
+
+        container.style.transform = `translate(${-translationX}px, ${-translationY}px) scale(${zoomFactor})`;
+      }
+
+      function wireIslands() {
+        islands.forEach((island) => {
+          const polygon = document.querySelector(`.overlay-svg .${CSS.escape(island)}`);
+          if (!polygon) return;
+
+          $(polygon).hover(function () {
+            $(`#${island}-medium`).toggleClass("hide");
+            $(`.${island}-current`).toggleClass("hide");
+          });
+
+          polygon.addEventListener("click", function () {
+            if (zoomedIsland !== null) {
+              zoomOut();
+              return;
+            }
+            zoomToPolygon(polygon);
+            addChallenge(island);
+            $("#current-challenge").removeClass("hide");
+            zoomedIsland = island;
+          });
+        });
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") zoomOut();
+      });
+
+      function updateSolves() {
+        try {
+          if (typeof our_solves === "undefined") return;
+
+          Object.keys(our_solves).forEach((solveChallengeId) => {
+            let challengeKey = solveChallengeId;
+
+            if (typeof challenge_id_to_name !== "undefined" && challenge_id_to_name[solveChallengeId]) {
+              challengeKey = challenge_id_to_name[solveChallengeId];
+            }
+
+            const island = challengeIsland[challengeKey];
+            if (island) setSolvedVisual(island);
+          });
+        } catch (e) {
+          console.error("updateSolves error:", e);
+        }
+      }
+      window.scoreboardUpdatedHook = updateSolves;
+
+      $(async function () {
+        wireIslands();
+
+        const apiUrl = "/pwncollege_api/v1/ctf_scoreboard/challenges";
+        challenges = await fetchChallenges(apiUrl);
+
+        try { if (typeof loadCtfScoreboard === "function") loadCtfScoreboard(); } catch (e) {}
+
+        updateSolves();
+      });
+      </script>
+
     
       #### CTF created by:
       - Zion Leonahenahe Basque, Arizona State University, CTF Ali'i
