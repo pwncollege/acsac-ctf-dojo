@@ -1,5 +1,5 @@
-id: acsac-2024-ctf
-name: ACSAC 2024 CTF
+id: acsac-ctfs
+name: ACSAC CTFs
 type: public
 allow_privileged: true
 
