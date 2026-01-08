@@ -121,12 +121,10 @@ modules:
         </div>
 
         <div class="island_container" id="island_container">
-
           <img class="ocean"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/Background_flip.png?raw=true"
                alt="Star map background"
                id="baseImage">
-
           <img class="island unsolved halulu-current halulu"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/halulu_L1.png?raw=true"
                alt="Halulu unsolved" id="halulu-light">
@@ -146,7 +144,6 @@ modules:
           <img class="island hide medium hokupaa"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/hokupaa_L2.png?raw=true"
                alt="Hokupaa medium" id="hokupaa-medium">
-
           <img class="island unsolved iwakelii-current iwakelii"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/iwakelii_L1.png?raw=true"
                alt="Iwakelii unsolved" id="iwakelii-light">
@@ -156,7 +153,6 @@ modules:
           <img class="island hide medium iwakelii"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/iwakelii_L2.png?raw=true"
                alt="Iwakelii medium" id="iwakelii-medium">
-
           <img class="island unsolved ka-heihei-ona-keiki-current ka-heihei-ona-keiki"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka-hei-hei-ona-keiki_L1.png?raw=true"
                alt="Ka hei-hei ona keiki unsolved" id="ka-heihei-ona-keiki-light">
@@ -186,7 +182,6 @@ modules:
           <img class="island hide medium ka-moi"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka_moi_L2.png?raw=true"
                alt="Ka moi medium" id="ka-moi-medium">
-
           <img class="island unsolved kaahupahau-current kaahupahau"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/kaahupahau_L1.png?raw=true"
                alt="Kaahupahau unsolved" id="kaahupahau-light">
@@ -196,7 +191,6 @@ modules:
           <img class="island hide medium kaahupahau"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/kaahupahau_L2.png?raw=true"
                alt="Kaahupahau medium" id="kaahupahau-medium">
-
           <img class="island unsolved kukalaniehu-current kukalaniehu"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/kukalaniehu_L1.png?raw=true"
                alt="Kukalaniehu unsolved" id="kukalaniehu-light">
@@ -206,7 +200,6 @@ modules:
           <img class="island hide medium kukalaniehu"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/kukalaniehu_L2.png?raw=true"
                alt="Kukalaniehu medium" id="kukalaniehu-medium">
-
           <img class="island unsolved manaiakalani-current manaiakalani"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/manaiakalani_L1.png?raw=true"
                alt="Manaiakalani unsolved" id="manaiakalani-light">
@@ -216,7 +209,6 @@ modules:
           <img class="island hide medium manaiakalani"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/manaiakalani_L2.png?raw=true"
                alt="Manaiakalani medium" id="manaiakalani-medium">
-
           <img class="island unsolved compass-current compass"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/compass_L1.png?raw=true"
                alt="Compass unsolved" id="compass-light">
@@ -226,7 +218,6 @@ modules:
           <img class="island hide medium compass"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/compass_L2.png?raw=true"
                alt="Compass medium" id="compass-medium">
-
           <svg class="overlay-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1423">
             <polygon class="island ka-heihei-ona-keiki"
                      points="40,524 235,46 238,42 239,41 241,40 423,175 428,181 428,187 290,611 286,618 45,538 40,536"
