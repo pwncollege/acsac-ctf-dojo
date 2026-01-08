@@ -17,6 +17,8 @@ modules:
       This year’s narrative follows the legendary voyager Hawaiʻiloa, who is said to have discovered the Hawaiian Islands by navigating the stars.
       Help Hawaiʻiloa across the Pacific toward Hawaiʻi, one constellation at a time.
 
+      Start with the starter challenge (the compass).
+
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <div style="display: flex; justify-content: center; position: relative; padding-bottom: 15ex;">
       <style>
