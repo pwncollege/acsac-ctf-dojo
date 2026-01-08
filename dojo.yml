@@ -20,7 +20,6 @@ modules:
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <div style="display:flex; justify-content:center; position:relative; padding-bottom:15ex;">
-
         <style>
           .island_container{
             position:relative;
@@ -63,16 +62,12 @@ modules:
           #current-challenge a{ color:#7090a3 !important; }
           #challenge-input{ color:#ffffff !important; }
         </style>
-
         <div class="hide" id="current-challenge">
           <span class="close" onclick="zoomOut()">X</span>
-
           <h1 class="title">Challenge Title</h1>
           <h4 class="points">Worth 0 points</h4>
           <h4 class="num-solves">0 solves</h4>
-
           <p class="challenge-description">Click a constellation to view its challenge.</p>
-
           <div class="container">
             <div class="accordion accordion-item" id="challenges">
               <div class="row">
@@ -91,7 +86,6 @@ modules:
                   </button>
                 </div>
               </div>
-
               <div class="row submit-row">
                 <div class="col-md-9 form-group">
                   <input id="module" type="hidden" value="">
@@ -106,7 +100,6 @@ modules:
                   </button>
                 </div>
               </div>
-
               <div class="row notification-row">
                 <div class="col-md-12">
                   <div id="result-notification" class="alert alert-dismissable text-center w-100"
@@ -115,7 +108,6 @@ modules:
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -248,7 +240,7 @@ modules:
           </svg>
         </div>
       </div>
-
+      
       <script>
       const islands = [
         "halulu",
