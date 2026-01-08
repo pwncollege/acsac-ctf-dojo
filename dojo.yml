@@ -823,8 +823,8 @@ modules:
       });
       $( document ).ready(function () {
         $(".accordion-item").each(function () {
+            if (this.id == "challenges") return;
             const chall = $(this);
-            if (chall.id == "challenges") return;
             const challenge = {
                 module: chall.find("#module").val(),
                 solves: chall.find(".total-solves").text(),
