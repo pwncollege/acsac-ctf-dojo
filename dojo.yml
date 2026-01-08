@@ -833,7 +833,7 @@ modules:
       $( document ).ready(function () {
         $(".accordion-item").each(function () {
             const chall = $(this);
-            if (chall.id == "challenges") continue;
+            if (chall.id == "challenges") return;
             const challenge = {
                 module: chall.find("#module").val(),
                 solves: chall.find(".total-solves").text(),
