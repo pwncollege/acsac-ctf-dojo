@@ -8,6 +8,62 @@ award:
   emoji: 🌴
 
 modules:
+  - id: challenges_25
+    name: ACSAC 2025 CTF Challenges
+    allow_privileged: true
+    description: |
+   	  Welcome to the second-ever ACSAC <a href="https://ctftime.org/ctf-wtf/">Capture the Flag (CTF)</a>, celebrating the 41st year of ACSAC.
+	  This year’s narrative follows the legendary voyager Hawaiʻiloa, who is said to have discovered the Hawaiian Islands by navigating the stars.
+	  Help Hawaiʻiloa across the Pacific toward Hawaiʻi, one constellation at a time.
+
+      #### CTF created by:
+      Zion Leonahenahe Basque, Arizona State University, CTF Ali'i
+      Will Rosenberg, Arizona State University
+      Wil Gibbs, Arizona State University
+      Siddharth Mishra, Arizona State University
+      Pulkit Singh Singaria, Arizona State University
+      Pratham Gupta, Arizona State University
+      Nathan Wong, University of Hawaiʻi at Mānoa
+      Hulin Wang, Arizona State University
+      Ethan Morrell, University of Hawaiʻi at Mānoa
+      Caden Sounart, Arizona State University
+      Ahmad Samara, Arizona State University
+    
+    challenges:
+      - id: panana
+        name: Pānānā
+
+      - id: postmortem
+        name: Hōkūpaʻa - postmortem
+
+      - id: halulu
+        name: Halulu
+        image: prathamgupta36/sammy-challenge-acsac:0.5
+
+      - id: kaheiheionakeiki
+        name: Ka hei hei o nā keiki
+        image: prathamgupta36/acsac-test:0.10
+
+      - id: iwakelii
+        name: Iwakeli`i
+
+      - id: doubleblindside
+        name: Kūkalaniʻehu - doubleblindside
+        image: hlw1234/acsac25-doubleblindside:0.5
+
+      - id: kamoi
+        name: Ka Mō'ī
+        image: x3ero0/acsac25-kamoi:1.3
+
+      - id: kalupeokawelo
+        name: Ka lupe o kawelo
+
+      - id: manaiakalani
+        name: Mānaiakalani
+
+      - id: stargazer
+        name: Kaʻahupāhau - Stargazer
+ 
   - id: challenges
     name: ACSAC 2024 CTF Challenges
     allow_privileged: true
