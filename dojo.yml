@@ -119,7 +119,6 @@ modules:
             </div>
           </div>
         </div>
-
         <div class="island_container" id="island_container">
           <img class="ocean"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/Background_flip.png?raw=true"
@@ -134,7 +133,6 @@ modules:
           <img class="island hide medium halulu"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/halulu_L2.png?raw=true"
                alt="Halulu medium" id="halulu-medium">
-
           <img class="island unsolved hokupaa-current hokupaa"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/hokupaa_L1.png?raw=true"
                alt="Hokupaa unsolved" id="hokupaa-light">
@@ -162,7 +160,6 @@ modules:
           <img class="island hide medium ka-heihei-ona-keiki"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka-hei-hei-ona-keiki_L2.png?raw=true"
                alt="Ka hei-hei ona keiki medium" id="ka-heihei-ona-keiki-medium">
-
           <img class="island unsolved ka-lupe-o-kawelo-current ka-lupe-o-kawelo"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka-lupe-o-kawelo_L1.png?raw=true"
                alt="Ka lupe o Kawelo unsolved" id="ka-lupe-o-kawelo-light">
@@ -172,7 +169,6 @@ modules:
           <img class="island hide medium ka-lupe-o-kawelo"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/medium/ka-lupe-o-kawelo_L2.png?raw=true"
                alt="Ka lupe o Kawelo medium" id="ka-lupe-o-kawelo-medium">
-
           <img class="island unsolved ka-moi-current ka-moi"
                src="https://github.com/pwncollege/acsac-ctf-dojo/blob/main/assets/25/challenges/light/ka_moi_L1.png?raw=true"
                alt="Ka moi unsolved" id="ka-moi-light">
