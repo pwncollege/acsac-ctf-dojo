@@ -1,4 +1,4 @@
-#!/usr/bin/env python-suid
+#!/usr/bin/exec-suid -- /usr/bin/python3 -I
 
 import hashlib
 
