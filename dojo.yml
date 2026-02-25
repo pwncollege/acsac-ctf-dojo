@@ -826,7 +826,7 @@ modules:
         image: adamdoupe/arm-rop
       - id: tickeyhellman
         name: tickeyhellman
-        image: adamdoupe/tickeyhellman
+        image: prathamgupta36/challenge-legacy:acsac
       - id: juniorust
         name: juniorust
         image: adamdoupe/cowsay
