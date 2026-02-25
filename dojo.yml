@@ -802,7 +802,7 @@ modules:
         required: false
       - id: slus-00000
         name: slus-00000
-        image: adamdoupe/slus-test
+        image: prathamgupta36/challenge-legacy:acsac
         description: |
           ## Hilo
 
@@ -820,22 +820,22 @@ modules:
 
       - id: walk-in-the-park
         name: walk-in-the-park
-        image: adamdoupe/walk-in-the-park
+        image: prathamgupta36/challenge-legacy:acsac
       - id: mechanical-arm
         name: mechanical-arm
-        image: adamdoupe/arm-rop
+        image: prathamgupta36/challenge-legacy:acsac
       - id: tickeyhellman
         name: tickeyhellman
         image: prathamgupta36/challenge-legacy:acsac
       - id: juniorust
         name: juniorust
-        image: adamdoupe/cowsay
+        image: prathamgupta36/challenge-legacy:acsac
       - id: the-morris-worm
         name: the-morris-worm
-        image: adamdoupe/the-morris-worm
+        image: prathamgupta36/challenge-legacy:acsac
       - id: temple-of-soul
         name: temple-of-soul
-        image: adamdoupe/temple-of-soul
+        image: prathamgupta36/challenge-legacy:acsac
         description: |
           ## Puna
           - Category: `rev`, `forensics`, `ZealOS`
@@ -873,7 +873,7 @@ modules:
 
       - id: waa
         name: Waʻa
-        image: adamdoupe/tickeyhellman
+        image: prathamgupta36/challenge-legacy:acsac
       - id: stutterstep
         name: stutterstep
       - id: orange
