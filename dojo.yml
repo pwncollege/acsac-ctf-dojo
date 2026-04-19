@@ -8,7 +8,6 @@ award:
   emoji: 🌴
 
 modules:
-modules:
   - id: challenges-25
     name: ACSAC 2025 CTF Challenges
     allow_privileged: true
@@ -878,3 +877,4 @@ modules:
         name: stutterstep
       - id: orange
         name: orange
+        privileged: true
